@@ -25,7 +25,7 @@ public class Visual extends javax.swing.JFrame {
     private int totalp = -1;
 
     //Guardamos la ruta del PDF--------------------------------------
-    private String ruta_archivo = "D:\\UNIVERSIDAD\\8VO SEMESTRE\\Diseño de Compiladores\\TRABAJO FINAL\\Compilador\\Compilador\\src\\instructivo\\Manual.pdf";
+    private String ruta_archivo = "D:\\UNIVERSIDAD\\8VO SEMESTRE\\Diseño de Compiladores\\TRABAJO FINAL\\Compilador\\Compilador_ Final\\src\\instructivo\\Manual.pdf";
     //---------------------------------------------------------------
 
     //Mantiene el zoom en la pagina que asignamos
