@@ -5,6 +5,8 @@
  */
 package lexicosintactico;
 
+import instructivo.Visual;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,6 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -42,7 +45,15 @@ public class Ventana extends javax.swing.JFrame {
     String tipo="";
     public Ventana() {
         initComponents();
-        
+//        MetodoLineasC tmpL = new MetodoLineasC();
+//       entrada=tmpL.text_pane;
+//       posicionPuntero(tmpL);
+//       JPanel tmpP = new JPanel(new BorderLayout());
+//       tmpP.add(tmpL,BorderLayout.WEST);
+//       tmpP.add(tmpL.scrollPane,BorderLayout.CENTER);
+//       txtcod.addTab("Consola",tmpP);
+        setResizable(false);
+        setLocationRelativeTo(null);
         
     }
 
@@ -55,38 +66,122 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem7 = new javax.swing.JMenuItem();
         panel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         Error = new javax.swing.JEditorPane();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         Lineas = new javax.swing.JEditorPane();
         LineaError = new javax.swing.JEditorPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txtATexto1 = new javax.swing.JTextArea();
+        txtcod = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtATraducido = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        btnTraducir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        MostrarTipoCar = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        guardar = new javax.swing.JMenuItem();
+        limpiar = new javax.swing.JMenu();
+        lim = new javax.swing.JMenuItem();
+        compilar = new javax.swing.JMenu();
+        Compi = new javax.swing.JMenuItem();
+        Ejec = new javax.swing.JMenu();
+        Ejecuta = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        instructivo = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        acerca = new javax.swing.JMenuItem();
+
+        jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel1.setBackground(new java.awt.Color(255, 102, 51));
+        panel1.setBackground(new java.awt.Color(0, 51, 153));
+        panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Error.setEditable(false);
+        Error.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        Error.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Error.setForeground(java.awt.Color.blue);
+        jScrollPane5.setViewportView(Error);
+
+        panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 518, 620, 120));
+
+        Lineas.setEditable(false);
+        Lineas.setText("1");
+        Lineas.setOpaque(false);
+
+        LineaError.setEditable(false);
+        LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        LineaError.setForeground(java.awt.Color.red);
+        LineaError.setToolTipText("");
+        LineaError.setOpaque(false);
+
+        txtcod.setColumns(20);
+        txtcod.setRows(5);
+        jScrollPane4.setViewportView(txtcod);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(LineaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Lineas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Lineas)
+            .addComponent(LineaError)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
+
+        panel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 1, 480, 640));
+
+        txtATraducido.setColumns(20);
+        txtATraducido.setRows(5);
+        jScrollPane1.setViewportView(txtATraducido);
+
+        panel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, 240, 390));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Código Convertido");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Resultado de la compilacion");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Tabla de Simbolos");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
         tabla.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -195,186 +290,18 @@ public class Ventana extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabla);
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Table.png"))); // NOI18N
-        jButton1.setText("Generar Tabla Análisis Léxico");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tabla de Simbolos");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Brush.png"))); // NOI18N
-        jButton3.setText("Limpiar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        Error.setEditable(false);
-        Error.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        Error.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Error.setForeground(java.awt.Color.blue);
-        jScrollPane5.setViewportView(Error);
-
-        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Component.png"))); // NOI18N
-        jButton2.setText("Análisis Sintáctico - Semántico");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        Lineas.setEditable(false);
-        Lineas.setText("1");
-        Lineas.setOpaque(false);
-
-        LineaError.setEditable(false);
-        LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        LineaError.setForeground(java.awt.Color.red);
-        LineaError.setToolTipText("");
-        LineaError.setOpaque(false);
-
-        txtATexto1.setColumns(20);
-        txtATexto1.setRows(5);
-        jScrollPane4.setViewportView(txtATexto1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(LineaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(Lineas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Lineas, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
-            .addComponent(LineaError)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jScrollPane2.setViewportView(jPanel1);
-
-        txtATraducido.setColumns(20);
-        txtATraducido.setRows(5);
-        jScrollPane1.setViewportView(txtATraducido);
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Código Convertido");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        btnTraducir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnTraducir.setText("Traducir a PROGRAMA");
-        btnTraducir.setEnabled(false);
-        btnTraducir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTraducirActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Lista de Errores Sintácticos y Semánticos");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
-                    .addComponent(jLabel5))
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 33, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
-                                .addGap(87, 87, 87))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTraducir, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(85, 85, 85)))
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(7, 7, 7)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTraducir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
+        panel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 289, 390));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/About.png"))); // NOI18N
         jMenu1.setText("Opciones");
-        jMenu1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
-        jMenu2.setText("Abrir");
+        jMenu2.setText("Cargar");
         jMenu2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
 
         jMenuItem1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/New document.png"))); // NOI18N
-        jMenuItem1.setText("Abrir Archivo.txt");
+        jMenuItem1.setText("Cargar archivo txt");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -383,48 +310,118 @@ public class Ventana extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenu1.add(jMenu2);
+        jMenu1.add(jSeparator1);
 
-        jMenuItem2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Apply.png"))); // NOI18N
-        jMenuItem2.setText("Guardar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem6.setText("Reiniciar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuItem6);
+        jMenu1.add(jSeparator2);
 
-        jMenuItem3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Info.png"))); // NOI18N
-        jMenuItem3.setText("Informacion");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        MostrarTipoCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Table.png"))); // NOI18N
+        MostrarTipoCar.setText("Mostrar el tipo de cadenas generadas");
+        MostrarTipoCar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                MostrarTipoCarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/New document.png"))); // NOI18N
-        jMenuItem4.setText("Guardar Archivo.bas");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/People.png"))); // NOI18N
-        jMenuItem5.setText("Instrucciones");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(MostrarTipoCar);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Guardar");
+
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Save.png"))); // NOI18N
+        guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(guardar);
+
+        jMenuBar1.add(jMenu3);
+
+        limpiar.setText("Limpiar");
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+
+        lim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/escoba.png"))); // NOI18N
+        lim.setText("Limpiar");
+        lim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limActionPerformed(evt);
+            }
+        });
+        limpiar.add(lim);
+
+        jMenuBar1.add(limpiar);
+
+        compilar.setText("Compilar");
+        compilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compilarActionPerformed(evt);
+            }
+        });
+
+        Compi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/marti.png"))); // NOI18N
+        Compi.setText("Compilar");
+        Compi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompiActionPerformed(evt);
+            }
+        });
+        compilar.add(Compi);
+
+        jMenuBar1.add(compilar);
+
+        Ejec.setText("Ejecutar");
+        Ejec.setEnabled(false);
+        Ejec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EjecActionPerformed(evt);
+            }
+        });
+
+        Ejecuta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Yes.png"))); // NOI18N
+        Ejecuta.setText("Ejecutar");
+        Ejecuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EjecutaActionPerformed(evt);
+            }
+        });
+        Ejec.add(Ejecuta);
+
+        jMenuBar1.add(Ejec);
+
+        jMenu6.setText("Ayuda");
+
+        instructivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Help book.png"))); // NOI18N
+        instructivo.setText("Instructivo");
+        instructivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instructivoActionPerformed(evt);
+            }
+        });
+        jMenu6.add(instructivo);
+        jMenu6.add(jSeparator7);
+
+        acerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/About.png"))); // NOI18N
+        acerca.setText("Acerca de");
+        acerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acercaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(acerca);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -432,15 +429,13 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();
@@ -488,9 +483,9 @@ public class Ventana extends javax.swing.JFrame {
 
         }catch(IOException e){}
 
-            txtATexto1.setText(lectura);//Mando lo que resulto de la lectura
+            txtcod.setText(lectura);//Mando lo que resulto de la lectura
             int contador=0;
-        StringTokenizer st = new StringTokenizer(txtATexto1.getText(),"\n",true);
+        StringTokenizer st = new StringTokenizer(txtcod.getText(),"\n",true);
                 String Text = "",token;
                 contador = 1;
 
@@ -515,34 +510,35 @@ public class Ventana extends javax.swing.JFrame {
 }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void MostrarTipoCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarTipoCarActionPerformed
+
         HashMap <String,Integer> r = new HashMap<>();
         HashMap <String,Integer> op = new HashMap<>();
         HashMap <String,Integer> id = new HashMap<>();
         HashMap <String,Integer> deli = new HashMap<>();
         HashMap <String,Integer> num = new HashMap<>();
         LinkedList <String> texto = new LinkedList<>();
-    
-        r.put("BEGIN", 0);
-        r.put("END", 0);
-        r.put("WORD", 0);
-        r.put("ALFA", 0);
-        r.put("NUM", 0);
-        r.put("DNUM", 0);
-        r.put("BOOL", 0);
+
+        r.put("comienzo", 0);
+        r.put("fin", 0);
+        r.put("cadena", 0);
+        r.put("ALFA", 0);//NO SE USA
+        r.put("entero", 0);
+        r.put("decimal", 0);
+        r.put("booleano", 0);
         r.put("LNUM", 0);
-        r.put("TAKE", 0);
-        r.put("SEND", 0);
-        r.put("WHEN", 0);
-        r.put("IT", 0);
+        r.put("leer", 0);
+        r.put("mostrar", 0);
+        r.put("mientras", 0);
+        r.put("si", 0);
         r.put("IS", 0);
-        r.put("START", 0);
-        r.put("STEP", 0);
-        r.put("TO", 0);
-        r.put("STOP", 0);
-        r.put("SWHEN", 0);
-        r.put("COMPLETE", 0);
-        
+        r.put("para", 0);
+        r.put("con_paso", 0);
+        r.put("hasta", 0);
+        r.put("finfor", 0);
+        r.put("finmientras", 0);
+        r.put("finsi", 0);
+
         op.put("/", 0);
         op.put("*", 0);
         op.put("+", 0);
@@ -553,7 +549,7 @@ public class Ventana extends javax.swing.JFrame {
         op.put(">", 0);
         op.put("||", 0);
         op.put("&&", 0);
-        
+
         deli.put("#", 0);
         deli.put(";", 0);
         deli.put("{", 0);
@@ -561,23 +557,20 @@ public class Ventana extends javax.swing.JFrame {
         deli.put(")", 0);
         deli.put(",", 0);
         deli.put("(",0);
-        
-        
-         
-        
+
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"Token","Cantidad","Tipo"});
-        
-        StringTokenizer st = new StringTokenizer(txtATexto1.getText(),"{}();,\"=+-*/><||&&# \n\t",true);
+
+        StringTokenizer st = new StringTokenizer(txtcod.getText(),"{}();,\"=+-*/><||&&# \n\t",true);
         String token, text = "";
         while (st.hasMoreTokens()){
             token = st.nextToken();
             if(!" ".equals(token) && !"\n".equals(token) && !"\t".equals(token)){
                 if (r.containsKey(token)) {
-                    r.put(token, r.get(token)+1);            
+                    r.put(token, r.get(token)+1);
                 }else {
                     if (op.containsKey(token)) {
-                        op.put(token, op.get(token)+1);            
+                        op.put(token, op.get(token)+1);
                     }else {
                         if (deli.containsKey(token)){
                             deli.put(token, deli.get(token)+1);
@@ -593,41 +586,41 @@ public class Ventana extends javax.swing.JFrame {
                             }
                         }else {
                             if (id.containsKey(token)) {
-                                id.put(token, id.get(token)+1); 
+                                id.put(token, id.get(token)+1);
                             }else {
                                 if(token.matches("([0-9]*)|([0-9]*.[0-9]+)")) {
                                     if (num.containsKey(token)) {
                                         num.put(token, num.get(token)+1);
-                                    }else num.put(token, 1); 
+                                    }else num.put(token, 1);
                                 }
-                                else id.put(token, 1); 
+                                else id.put(token, 1);
                             }
                         }
                     }
                 }
             }
         }
-        
+
         Iterator<String> itr = r.keySet().iterator();
         while(itr.hasNext()){
             token = itr.next();
             if(r.get(token) > 0)model.addRow(new Object[]{token, r.get(token),"Palabra Reservada"});
-        } 
+        }
         itr = op.keySet().iterator();
         while(itr.hasNext()){
             token = itr.next();
             if(op.get(token) > 0) model.addRow(new Object[]{token, op.get(token),"Operador"});
-        } 
+        }
         itr = deli.keySet().iterator();
         while(itr.hasNext()){
             token = itr.next();
             if(deli.get(token) > 0) model.addRow(new Object[]{token, deli.get(token),"Delimitador"});
-        } 
+        }
         itr = id.keySet().iterator();
         while(itr.hasNext()){
             token = itr.next();
             if(id.get(token) > 0) model.addRow(new Object[]{token, id.get(token),"Identificador"});
-        } 
+        }
         itr = num.keySet().iterator();
         while(itr.hasNext()){
             token = itr.next();
@@ -639,17 +632,518 @@ public class Ventana extends javax.swing.JFrame {
         itr = texto.iterator();
         while(itr.hasNext()){
             model.addRow(new Object[]{itr.next(), "1","Texto"});
-            
-        }
-        tabla.setModel(model);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        errores=0;
+        }
+       
+        tabla.setModel(model);
+    }//GEN-LAST:event_MostrarTipoCarActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void compilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compilarActionPerformed
+        
+          
+    }//GEN-LAST:event_compilarActionPerformed
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+  
+    }//GEN-LAST:event_limpiarActionPerformed
+
+    private void EjecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecActionPerformed
+     
+    }//GEN-LAST:event_EjecActionPerformed
+
+    private void limActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limActionPerformed
+        txtcod.setText("");
+        LineaError.setText("");
+        Error.setText("");
+        txtATraducido.setText("");
+        Ejec.setEnabled(false);
+    }//GEN-LAST:event_limActionPerformed
+
+    private void EjecutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaActionPerformed
+     txtATraducido.setText("");
+        String
+               simbolo = "([=<>])",
+                id = "([(a-z)(A-Z)](\\w)*)",
+                num = "((\\d)+)",
+                dec = "((\\d)+(\\.)(\\d)+)",
+                text = "((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)",
+                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                //take = "((\\s)*leer(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
+                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                operaciones = "(("+id+"|"+num+"|"+dec+")(\\s)*([+-/*](\\s)*("+id+"|"+num+"|"+dec+"))+)",
+                defVal = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*(;))",
+                defValVar = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*)",
+                condicion = id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")((\\s)*([(&&)(||)](\\s)*"+id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")))*",
+                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
+                main = "((\\s)*"+id+"txtATraducidocomienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                main2 = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
+                
+               start2 = "((\\s)*para(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
+                foresito = "((\\s)*FOR(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*)",
+                start3 = "((\\s)*STOP(\\s)*(\\}))",
+                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+               when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                it2 = "((\\s)*si(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+                it3 = "((\\s)*finsi(\\s)*(\\}))",
+                 entero = "[0-9]*",
+                step="(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)",
+                to="hasta(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{)",
+                decimal = "[0-9]*.[0-9]+";
+
+                StringTokenizer st = new StringTokenizer(txtcod.getText(),"\n");
+                String token;
+                while (st.hasMoreTokens()){
+                    //JOptionPane.showMessageDialog(this,"Identificando Variables...");
+                    token = st.nextToken();
+                    
+                    if(token.matches(main2))
+                    {
+                        
+                        String tokinn="'";
+                        StringTokenizer tokin = new StringTokenizer(token," \n");
+                        while(tokin.hasMoreTokens()){
+                            String testo="";
+                            testo=testo+txtATraducido.getText();
+                            tokinn=tokin.nextToken();
+                            if(tokinn.contains("comienzo")){
+                                txtATraducido.setText(testo+"REM ");
+
+                            }
+                            if  (tokinn.matches(id) && tokinn.contains("comienzo")==false  && tokinn.contains("{")==false){
+                                txtATraducido.setText("Iniciando ejecucion;\n...\n "+testo+tokinn+"");
+                            }
+                            if(tokinn.contains("{")){
+                                txtATraducido.setText(testo+" ;\n");
+                            }
+                        }
+
+                    }
+
+                    if(token.matches(var)){
+                        String a ="";
+                        a=txtATraducido.getText();
+                        a=a+"DIM  ";
+                        txtATraducido.setText(a);
+                        String tokinn="";
+                        StringTokenizer tokin = new StringTokenizer(token," \n,;");
+                        while(tokin.hasMoreTokens()){
+                                String testo="";
+                                testo=testo+txtATraducido.getText();
+                                tokinn=tokin.nextToken();
+                                
+                                if(tokinn.contains("entero") || tokinn.contains("decimal") || tokinn.contains("cadena")){
+                                    String enteros="";
+                                    if(tokinn.contains("entero")){
+                                     enteros=" AS INTEGER";
+                                    }
+                                    if(tokinn.contains("decimal")){
+                                     enteros=" AS DOUBLE";
+                                    }
+                                    if(tokinn.contains("cadena")){
+                                     enteros=" AS STRING";
+                                    }
+
+                                    int contador=0;
+                                    while(tokin.hasMoreTokens()){
+                                        tokinn=tokin.nextToken();
+                                        if(tokinn.equals(";")){
+
+                                        }else{
+                                          if(contador>=1){
+                                          enteros=tokinn+","+enteros;
+                                          }else{
+                                          enteros=tokinn+enteros;
+                                          }
+                                        }
+                                        contador+=1;
+                                    }
+                                    txtATraducido.setText(testo+enteros+"\n");
+                                }
+
+                        }
+                    }
+
+                }
+                String b=txtATraducido.getText();
+                b=b+"  \n";
+                txtATraducido.setText(b);
+                
+                
+                StringTokenizer st1 = new StringTokenizer(txtcod.getText(),"\n");
+                String token1;
+                while (st1.hasMoreTokens()){
+                    //JOptionPane.showMessageDialog(this,"Identificando Instrucciones...");
+                    token1 = st1.nextToken();
+                    //JOptionPane.showMessageDialog(this,token1);
+                  
+                    /*if(token1.matches(start2)){
+                      
+                        String a=txtATraducido.getText()+"\nFOR ";
+                        txtATraducido.setText(a);
+                        StringTokenizer st2= new StringTokenizer(token1,"()");
+                    }*/
+                    if(token1.matches(start3)){
+                        //JOptionPane.showMessageDialog(this,"Termina FOR");
+                        String a=txtATraducido.getText()+"\nNEXT\n";
+                        txtATraducido.setText(a);
+                    }
+                   if(token1.matches(when2)){
+                        StringTokenizer st2= new StringTokenizer (token1,"()");
+                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
+                            String tuken= st2.nextToken();
+                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
+                                    if(tuken.contains("=")){
+                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
+                                        while(st3.hasMoreTokens()){
+                                            String tuken2=st3.nextToken();
+                                            
+                                            if(st3.hasMoreTokens()==true){
+                                                String a=txtATraducido.getText()+tuken2+"=";
+                                                txtATraducido.setText(a);
+                                            }else{
+                                                String a=txtATraducido.getText()+tuken2;
+                                                txtATraducido.setText(a);
+                                            }
+                                            
+                                        }
+                                    }else{
+                                       String a= txtATraducido.getText()+ tuken;
+                                       txtATraducido.setText(a);
+                                    }
+                            }
+                            
+                            if(tuken.contains("mientras")){
+                                String a=txtATraducido.getText()+"\nWHILE ";
+                                txtATraducido.setText(a);
+                                /*String loqueva=a+txtATraducido.getText()+" THEN";
+                                txtATraducido.setText(loqueva);*/
+                            }
+                            if(tuken.contains("{")){
+                                String a=txtATraducido.getText()+"\n";
+                                txtATraducido.setText(a);
+                            }
+                        }
+                    }
+                    if(token1.matches(when3)){
+                        String a=txtATraducido.getText()+"\nWEND \n";
+                        txtATraducido.setText(a);
+                    }
+                    if(token1.matches(it2)){
+                        StringTokenizer st2= new StringTokenizer (token1,"()");
+                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
+                            String tuken= st2.nextToken();
+                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
+                                    if(tuken.contains("=")){
+                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
+                                        while(st3.hasMoreTokens()){
+                                            String tuken2=st3.nextToken();
+                                            
+                                            if(st3.hasMoreTokens()==true){
+                                                String a=txtATraducido.getText()+tuken2+"=";
+                                                txtATraducido.setText(a);
+                                            }else{
+                                                String a=txtATraducido.getText()+tuken2;
+                                                txtATraducido.setText(a);
+                                            }
+                                            
+                                        }
+                                    }else{
+                                       String a= txtATraducido.getText()+ tuken;
+                                       txtATraducido.setText(a);
+                                    }
+                            }
+                            
+                            if(tuken.contains("si")){
+                                String a=txtATraducido.getText()+"\nIF ";
+                                txtATraducido.setText(a);
+                                /*String loqueva=a+txtATraducido.getText()+" THEN";
+                                txtATraducido.setText(loqueva);*/
+                            }
+                            if(tuken.contains("{")){
+                                String a=txtATraducido.getText()+" THEN\n";
+                                txtATraducido.setText(a);
+                            }
+                        }
+                    }
+                    if(token1.matches(it3)){
+                        String a=txtATraducido.getText()+"\nfin IF \n";
+                        txtATraducido.setText(a);
+                    }
+                    if(token1.matches(main3)){
+                        
+                        String c=txtATraducido.getText()+"\n";
+                        txtATraducido.setText(c);
+                    }
+                    if(token1.matches(take)){
+                        StringTokenizer st2 = new StringTokenizer(token1,"()");
+                        while(st2.hasMoreTokens()){
+                            String tuken=st2.nextToken();
+                            if(tuken.contains("leer")){
+                                
+                                String a=txtATraducido.getText()+"\nINPUT  ";
+                                a=a.replace('#','"');
+                                txtATraducido.setText(a);
+                            }
+                            if(tuken.contains("+")){
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+",";
+                                        a=a.replace('#','"');
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                        a=a.replace('#','"');
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                             
+                          
+                            
+                            if (tuken.contains(";")) {
+                                String a=txtATraducido.getText()+"\n";
+                                a=a.replace('#','"');
+                                txtATraducido.setText(a);
+                                
+                            }
+                            if(tuken.contains("leer")==false && tuken.contains("+")==false && tuken.contains(";")==false){
+                                String a=txtATraducido.getText()+tuken;
+                                a=a.replace('#','"');
+                                txtATraducido.setText(a);
+                            }
+                        }
+                    }
+                    
+                     
+                  
+                            /*if(tuken.contains(" ")){
+                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+" ";
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                        
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }*/
+                            /*if(tuken.contains("con_paso")){
+                                 JOptionPane.showMessageDialog(null,"Encontre con_paso");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+" ";
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                      
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                            if(tuken.matches(entero)){
+                                 JOptionPane.showMessageDialog(null,"Encontre entero");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+" ";
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                      
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                            if(tuken.contains("hasta")){
+                                 JOptionPane.showMessageDialog(null,"Encontre to  ");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito;
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                      
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }*/
+                            
+                             /*if(tuken.contains(" ")){
+                                  JOptionPane.showMessageDialog(null,"Encontre espacio");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+" ";
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                      
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                          if(tuken.matches(to)){
+                              JOptionPane.showMessageDialog(null,"Encontre un hasta");
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+" ";
+                                       
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                      
+                                        
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                          
+                            
+                            if (tuken.contains(" ")) {
+                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
+                                String a=txtATraducido.getText()+" ";
+                               
+                                txtATraducido.setText(a);
+                                
+                            }*/
+                            /*if(tuken.contains("para")==false && tuken.contains("con_paso")==false && tuken.contains("{")==false&& tuken.contains(entero)==false){
+                                 JOptionPane.showMessageDialog(null,"Encontre otra cosa");
+                                 String tokesito="";
+                                StringTokenizer tuk= new StringTokenizer(tuken," ");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    System.out.println(""+tokesito);
+                                }
+                                String a=txtATraducido.getText()+tuken;
+                                a=a.replaceAll(step," ");
+                                txtATraducido.setText(a);
+                            }*/
+                        
+                    
+                     if(token1.matches(send)){
+                        StringTokenizer st2 = new StringTokenizer(token1,"()");
+                        while(st2.hasMoreTokens()){
+                            String tuken=st2.nextToken();
+                            if(tuken.contains("mostrar")){
+                                
+                                String a=txtATraducido.getText()+"\n  ";
+                                a=a.replace('#','"');
+                                
+                                txtATraducido.setText(a);
+                            }
+                            if(tuken.contains("+")){
+                                String tokesito;
+                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
+                                while(tuk.hasMoreTokens()){
+                                    tokesito=tuk.nextToken();
+                                    if(tuk.hasMoreTokens()){
+                                        String a=txtATraducido.getText()+tokesito+",";
+                                        a=a.replace('#','"');
+                                        txtATraducido.setText(a);
+                                    }else{
+                                        String a=txtATraducido.getText()+tokesito;
+                                        a=a.replace('#','"');
+                                        txtATraducido.setText(a);
+                                    }
+                                }
+                            }
+                            
+                            if (tuken.contains(";")) {
+                                String a=txtATraducido.getText()+" \n";
+                                a=a.replace('#','"');
+                                txtATraducido.setText(a);
+                            }
+                            if(tuken.contains("mostrar")==false && tuken.contains("+")==false && tuken.contains(";")==false){
+                                String a=txtATraducido.getText()+tuken;
+                                a=a.replace('#','"');
+                                txtATraducido.setText(a);
+                            }
+                        }
+                    }
+                    
+                    if(token1.matches(defVal)){
+                        String tokesito;
+                         StringTokenizer tuk= new StringTokenizer(token1);
+                        while(tuk.hasMoreTokens()){
+                           tokesito=tuk.nextToken();
+                           String a=txtATraducido.getText()+tokesito+"\n";
+                           a=a.replace(';',' ');
+                           txtATraducido.setText(a);
+                        }
+                        
+                    JOptionPane.showMessageDialog(this,"Se encontro una operación");
+                    
+                    }
+                    
+                    //ESTA COSA ES PARA EL CICLO FOR
+                    if(token1.matches(start2)){ //Compara si esta el matches dentro del token
+                        String tokesito="";
+                        String texto="";
+                         StringTokenizer tuk= new StringTokenizer(token1,"\\s");
+                        while(tuk.hasMoreTokens()){
+                           tokesito=tuk.nextToken();
+                           String a=txtATraducido.getText()+"\n";//almacenoo todo
+                           tokesito=tokesito.replace("para","FOR");//reemplazo
+                           tokesito=tokesito.replaceAll(step," ");
+                            tokesito=tokesito.replace("{","\n");
+                           texto+=a+tokesito;//se guarda en el acumulador de lo reemplazado
+                           txtATraducido.setText(texto);
+                           
+                        }
+                       
+                    JOptionPane.showMessageDialog(this,"Se encontro un ciclo for");
+                    
+                    }
+                    
+                    //CICLO FOR
+                    
+              
+                }
+    }//GEN-LAST:event_EjecutaActionPerformed
+
+    private void CompiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompiActionPerformed
+          errores=0;
         LinkedList <String> ENT = new LinkedList<>();
         LinkedList <String> DEC = new LinkedList<>();
         LinkedList <String> TEXT = new LinkedList<>();
-        LinkedList <String> TAKE = new LinkedList<>();
+        LinkedList <String> leer = new LinkedList<>();
         
         String
                 simbolo = "([=<>])",
@@ -657,35 +1151,35 @@ public class Ventana extends javax.swing.JFrame {
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)",
-                send = "((\\s)*SEND(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
-                //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                //take = "((\\s)*leer(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
+                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "(("+id+"|"+num+"|"+dec+")(\\s)*([+-/*](\\s)*("+id+"|"+num+"|"+dec+"))+)",
                 defVal = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*(;))",
                 defValVar = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*)",
                 condicion = id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")((\\s)*([(&&)(||)](\\s)*"+id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")))*",
-                var = "((\\s)*((NUM)|(DNUM)|(WORD))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
-                main = "((\\s)*"+id+"(\\b)(\\s)*BEGIN(\\s)*(\\{)[.\\W\\w\\s]*(END(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*"+id+"(\\b)(\\s)*BEGIN(\\s)*(\\{))",
-                main3 = "((\\s)*END(\\s)*(\\})(\\s)*)",
+                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
+                main = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                main2 = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
                 
-               start2 = "((\\s)*START(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(STEP)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
+               start2 = "((\\s)*para(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-               when3 = "((\\s)*SWHEN(\\s)*(\\}))",
-                it2 = "((\\s)*IT(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-                it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
+                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+               when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                it2 = "((\\s)*si(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+                it3 = "((\\s)*finsi(\\s)*(\\}))",
                  entero = "[0-9]*",
                 decimal = "[0-9]*.[0-9]+";
         
                 
                 LinkedList <Integer> error = new LinkedList<>();
-                StringTokenizer st = new StringTokenizer(txtATexto1.getText(),";{}",true);
+                StringTokenizer st = new StringTokenizer(txtcod.getText(),";{}",true);
                 String token = "", txt = "", e;
                 int i = 1, mainE = 0, start = 0, when = 0, it = 0, eB = 0;
                 Error.setText("");
                 
-                if(txtATexto1.getText().matches(main)) {
+                if(txtcod.getText().matches(main)) {
                     
                     while (st.hasMoreTokens()){
                         token = st.nextToken();
@@ -716,12 +1210,12 @@ public class Ventana extends javax.swing.JFrame {
                                     StringTokenizer stTipo = new StringTokenizer(token," ,;");
                                     String tipo = stTipo.nextToken();
                                     
-                                    if(tipo.contains("NUM")){
+                                    if(tipo.contains("entero")){
                                         
                                         while(stTipo.hasMoreTokens()){
                                             tipo = stTipo.nextToken();
                                             
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| TAKE.contains(tipo)){
+                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
                                                 Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
                                                                + "________________________________________________________________________\n"+token);
                                                 for(int j = 1; j <i; j++){
@@ -735,12 +1229,12 @@ public class Ventana extends javax.swing.JFrame {
                                             ENT.add(tipo);
                                         }
                                     }
-                                    if(tipo.contains("DNUM")){
+                                    if(tipo.contains("decimal")){
                                         
                                         while(stTipo.hasMoreTokens()){
                                             tipo = stTipo.nextToken();
                                             
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| TAKE.contains(tipo)){
+                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
                                                 Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
                                                                + "________________________________________________________________________\n"+token);
                                                 for(int j = 1; j <i; j++){
@@ -754,13 +1248,13 @@ public class Ventana extends javax.swing.JFrame {
                                             DEC.add(tipo);
                                         }
                                     }
-                                    if(tipo.contains("TAKE")){
+                                    if(tipo.contains("leer")){
                                        
                                         
                                         while(stTipo.hasMoreTokens()){
                                             tipo = stTipo.nextToken();
                                             
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| TAKE.contains(tipo)){
+                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
                                                 Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
                                                                + "________________________________________________________________________\n"+token);
                                                 for(int j = 1; j <i; j++){
@@ -771,15 +1265,15 @@ public class Ventana extends javax.swing.JFrame {
                                                 break;
                                             }
                                             
-                                            TAKE.add(tipo);
+                                            leer.add(tipo);
                                         }
                                     }
-                                    if(tipo.contains("WORD")){
+                                    if(tipo.contains("cadena")){
                                        
                                         while(stTipo.hasMoreTokens()){
                                             tipo = stTipo.nextToken();
                                             
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| TAKE.contains(tipo)){
+                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
                                                 Error.setText("La variable esta repetida ("+tipo+") "+i+": \n"
                                                                + "________________________________________________________________________\n"+token);
                                                 for(int j = 1; j <i; j++){
@@ -900,9 +1394,9 @@ public class Ventana extends javax.swing.JFrame {
                             
                             
                             else {
-                                if(token.contains("SEND")){
-                                    txtATraducido.setText("PRINT");
-                                    Error.setText("Error al declarar sentencia SEND; en la linea "+i+": \n"
+                                if(token.contains("mostrar")){
+                                    txtATraducido.setText("");
+                                    Error.setText("Error al declarar sentencia mostrar; en la linea "+i+": \n"
                                                    + "\n"+token);
                                      errores=1;
                                     for(int j = 1; j <i; j++){
@@ -912,7 +1406,7 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")){
+                                if(token.contains("entero") || token.contains("decimal") || token.contains("cadena")){
                                     Error.setText("Error en declaracion de variables; en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
@@ -922,8 +1416,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("TAKE")){
-                                    Error.setText("Error en lectura de valor TAKE  en la linea "+i+": \n"
+                                if(token.contains("leer")){
+                                    Error.setText("Error en lectura de valor leer  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -934,7 +1428,7 @@ public class Ventana extends javax.swing.JFrame {
                                 }
                                 if(token.contains("STOP}")){
                                     
-                                    Error.setText("Cierre de Ciclo START incorrecto  en la linea "+i+": \n"
+                                    Error.setText("Cierre de Ciclo para incorrecto  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -943,9 +1437,9 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("START")){
+                                if(token.contains("para")){
                                     
-                                    Error.setText("Inicio de Ciclo START incorrecto  en la linea "+i+": \n"
+                                    Error.setText("Inicio de Ciclo para incorrecto  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -954,8 +1448,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("SWHEN")){
-                                    Error.setText("Cierre de ciclo WHEN incorrecto en la linea "+i+": \n"
+                                if(token.contains("finmientras")){
+                                    Error.setText("Cierre de ciclo mientras incorrecto en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -963,8 +1457,8 @@ public class Ventana extends javax.swing.JFrame {
                                     LineaError.setText(txt+" ¡!");
                                     break;
                                 }
-                                if(token.contains("WHEN")){
-                                    Error.setText("Inicio de ciclo WHEN incorrecto en la linea "+i+": \n"
+                                if(token.contains("mientras")){
+                                    Error.setText("Inicio de ciclo mientras incorrecto en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -973,9 +1467,9 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("COMPLETE")){
+                                if(token.contains("finsi")){
                                     
-                                    Error.setText("Cierre de condicion IT incorrecto en la linea "+i+": \n"
+                                    Error.setText("Cierre de condicion si incorrecto en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -984,9 +1478,9 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("IT")){
+                                if(token.contains("si")){
                                    
-                                    Error.setText("Inicio de IT incorrecto; en la linea "+i+": \n"
+                                    Error.setText("Inicio de si incorrecto; en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1013,7 +1507,7 @@ public class Ventana extends javax.swing.JFrame {
                 }
                    
                 else {
-                    st = new StringTokenizer(txtATexto1.getText(),";{}",true);
+                    st = new StringTokenizer(txtcod.getText(),";{}",true);
                     while (st.hasMoreTokens()){
                         token = st.nextToken();
                         if(st.hasMoreTokens())token = token+st.nextToken();
@@ -1041,8 +1535,8 @@ public class Ventana extends javax.swing.JFrame {
                             }
                              
                             else {
-                                if(token.contains("SEND")){
-                                    Error.setText("Error al declarar sentencia SEND  en la linea "+i+": \n"
+                                if(token.contains("mostrar")){
+                                    Error.setText("Error al declarar sentencia mostrar  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1051,7 +1545,7 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")){
+                                if(token.contains("entero") || token.contains("decimal") || token.contains("cadena")){
                                     Error.setText("Error en declaracion de variables  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
@@ -1061,8 +1555,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("TAKE")){
-                                    Error.setText("Error en lectura de valor TAKE en la linea "+i+": \n"
+                                if(token.contains("leer")){
+                                    Error.setText("Error en lectura de valor leer en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1072,7 +1566,7 @@ public class Ventana extends javax.swing.JFrame {
                                     break;
                                 }
                                 if(token.contains("STOP}")){
-                                    Error.setText("Cierre de Ciclo START incorrecto en la linea "+i+": \n"
+                                    Error.setText("Cierre de Ciclo para incorrecto en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1081,8 +1575,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("START")){
-                                    Error.setText("Inicio de Ciclo START incorrecto  en la linea "+i+": \n"
+                                if(token.contains("para")){
+                                    Error.setText("Inicio de Ciclo para incorrecto  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1091,7 +1585,7 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("SWHEN")){
+                                if(token.contains("finmientras")){
                                     Error.setText("Cierre de ciclo WHEN incorrecto  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
@@ -1101,8 +1595,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("WHEN")){
-                                    Error.setText("Inicio de ciclo WHEN incorrecto  en la linea "+i+": \n"
+                                if(token.contains("mientras")){
+                                    Error.setText("Inicio de ciclo mientras incorrecto  en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1111,8 +1605,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("COMPLETE")){
-                                    Error.setText("Cierre de condicion IT incorrecto; en la linea "+i+": \n"
+                                if(token.contains("finsi")){
+                                    Error.setText("Cierre de condicion si incorrecto; en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1121,8 +1615,8 @@ public class Ventana extends javax.swing.JFrame {
                                      errores=1;
                                     break;
                                 }
-                                if(token.contains("IT")){
-                                    Error.setText("Inicio de IT incorrecto en la linea "+i+": \n"
+                                if(token.contains("si")){
+                                    Error.setText("Inicio de si incorrecto en la linea "+i+": \n"
                                                    + "\n"+token);
                                     for(int j = 1; j <i; j++){
                                         txt += "\n";
@@ -1154,518 +1648,29 @@ public class Ventana extends javax.swing.JFrame {
                     }
                 }
             if(errores==1){
-            btnTraducir.setEnabled(false);
+            Ejec.setEnabled(false);
+            
         }else{
-             btnTraducir.setEnabled(true);
+                
+             Ejec.setEnabled(true);
+             Error.setText("Analisis sintactico exitoso, no se han encontrado errores");
+             Error.setForeground(new Color(0, 255, 0));
         }
-               
-             
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CompiActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        txtATexto1.setText("");
-        LineaError.setText("");
-        Error.setText("");
-        txtATraducido.setText("");
-        btnTraducir.setEnabled(false);
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Guardar();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Informacion inf=new Informacion();
+    private void acercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaActionPerformed
+       Informacion inf=new Informacion();
         inf.show();
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_acercaActionPerformed
 
-    private void btnTraducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraducirActionPerformed
-      txtATraducido.setText("");
-        String
-               simbolo = "([=<>])",
-                id = "([(a-z)(A-Z)](\\w)*)",
-                num = "((\\d)+)",
-                dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)",
-                send = "((\\s)*SEND(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
-                //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "(("+id+"|"+num+"|"+dec+")(\\s)*([+-/*](\\s)*("+id+"|"+num+"|"+dec+"))+)",
-                defVal = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*(;))",
-                defValVar = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*)",
-                condicion = id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")((\\s)*([(&&)(||)](\\s)*"+id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")))*",
-                var = "((\\s)*((NUM)|(DNUM)|(WORD))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
-                main = "((\\s)*"+id+"txtATraducidoBEGIN(\\s)*(\\{)[.\\W\\w\\s]*(END(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*"+id+"(\\b)(\\s)*BEGIN(\\s)*(\\{))",
-                main3 = "((\\s)*END(\\s)*(\\})(\\s)*)",
-                
-               start2 = "((\\s)*START(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(STEP)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
-                foresito = "((\\s)*FOR(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(TO)(\\b)(\\s)*("+id+"|"+num+")(\\s)*)",
-                start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-               when3 = "((\\s)*SWHEN(\\s)*(\\}))",
-                it2 = "((\\s)*IT(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-                it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
-                 entero = "[0-9]*",
-                step="(STEP)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)",
-                to="TO(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{)",
-                decimal = "[0-9]*.[0-9]+";
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+      Guardar();
+    }//GEN-LAST:event_guardarActionPerformed
 
-                StringTokenizer st = new StringTokenizer(txtATexto1.getText(),"\n");
-                String token;
-                while (st.hasMoreTokens()){
-                    //JOptionPane.showMessageDialog(this,"Identificando Variables...");
-                    token = st.nextToken();
-                    
-                    if(token.matches(main2))
-                    {
-                        
-                        String tokinn="'";
-                        StringTokenizer tokin = new StringTokenizer(token," \n");
-                        while(tokin.hasMoreTokens()){
-                            String testo="";
-                            testo=testo+txtATraducido.getText();
-                            tokinn=tokin.nextToken();
-                            if(tokinn.contains("BEGIN")){
-                                txtATraducido.setText(testo+"REM ");
-
-                            }
-                            if  (tokinn.matches(id) && tokinn.contains("BEGIN")==false  && tokinn.contains("{")==false){
-                                txtATraducido.setText("REM Ing. Javier Mendoza Loor;\nREM "+testo+tokinn+"");
-                            }
-                            if(tokinn.contains("{")){
-                                txtATraducido.setText(testo+" ;\n");
-                            }
-                        }
-
-                    }
-
-                    if(token.matches(var)){
-                        String a ="";
-                        a=txtATraducido.getText();
-                        a=a+"DIM  ";
-                        txtATraducido.setText(a);
-                        String tokinn="";
-                        StringTokenizer tokin = new StringTokenizer(token," \n,;");
-                        while(tokin.hasMoreTokens()){
-                                String testo="";
-                                testo=testo+txtATraducido.getText();
-                                tokinn=tokin.nextToken();
-                                
-                                if(tokinn.contains("NUM") || tokinn.contains("DNUM") || tokinn.contains("WORD")){
-                                    String enteros="";
-                                    if(tokinn.contains("NUM")){
-                                     enteros=" AS INTEGER";
-                                    }
-                                    if(tokinn.contains("DNUM")){
-                                     enteros=" AS DOUBLE";
-                                    }
-                                    if(tokinn.contains("WORD")){
-                                     enteros=" AS STRING";
-                                    }
-
-                                    int contador=0;
-                                    while(tokin.hasMoreTokens()){
-                                        tokinn=tokin.nextToken();
-                                        if(tokinn.equals(";")){
-
-                                        }else{
-                                          if(contador>=1){
-                                          enteros=tokinn+","+enteros;
-                                          }else{
-                                          enteros=tokinn+enteros;
-                                          }
-                                        }
-                                        contador+=1;
-                                    }
-                                    txtATraducido.setText(testo+enteros+"\n");
-                                }
-
-                        }
-                    }
-
-                }
-                String b=txtATraducido.getText();
-                b=b+"  \n";
-                txtATraducido.setText(b);
-                
-                
-                StringTokenizer st1 = new StringTokenizer(txtATexto1.getText(),"\n");
-                String token1;
-                while (st1.hasMoreTokens()){
-                    //JOptionPane.showMessageDialog(this,"Identificando Instrucciones...");
-                    token1 = st1.nextToken();
-                    //JOptionPane.showMessageDialog(this,token1);
-                  
-                    /*if(token1.matches(start2)){
-                      
-                        String a=txtATraducido.getText()+"\nFOR ";
-                        txtATraducido.setText(a);
-                        StringTokenizer st2= new StringTokenizer(token1,"()");
-                    }*/
-                    if(token1.matches(start3)){
-                        //JOptionPane.showMessageDialog(this,"Termina FOR");
-                        String a=txtATraducido.getText()+"\nNEXT\n";
-                        txtATraducido.setText(a);
-                    }
-                   if(token1.matches(when2)){
-                        StringTokenizer st2= new StringTokenizer (token1,"()");
-                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
-                            String tuken= st2.nextToken();
-                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
-                                    if(tuken.contains("=")){
-                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
-                                        while(st3.hasMoreTokens()){
-                                            String tuken2=st3.nextToken();
-                                            
-                                            if(st3.hasMoreTokens()==true){
-                                                String a=txtATraducido.getText()+tuken2+"=";
-                                                txtATraducido.setText(a);
-                                            }else{
-                                                String a=txtATraducido.getText()+tuken2;
-                                                txtATraducido.setText(a);
-                                            }
-                                            
-                                        }
-                                    }else{
-                                       String a= txtATraducido.getText()+ tuken;
-                                       txtATraducido.setText(a);
-                                    }
-                            }
-                            
-                            if(tuken.contains("WHEN")){
-                                String a=txtATraducido.getText()+"\nWHILE ";
-                                txtATraducido.setText(a);
-                                /*String loqueva=a+txtATraducido.getText()+" THEN";
-                                txtATraducido.setText(loqueva);*/
-                            }
-                            if(tuken.contains("{")){
-                                String a=txtATraducido.getText()+"\n";
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    if(token1.matches(when3)){
-                        String a=txtATraducido.getText()+"\nWEND \n";
-                        txtATraducido.setText(a);
-                    }
-                    if(token1.matches(it2)){
-                        StringTokenizer st2= new StringTokenizer (token1,"()");
-                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
-                            String tuken= st2.nextToken();
-                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
-                                    if(tuken.contains("=")){
-                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
-                                        while(st3.hasMoreTokens()){
-                                            String tuken2=st3.nextToken();
-                                            
-                                            if(st3.hasMoreTokens()==true){
-                                                String a=txtATraducido.getText()+tuken2+"=";
-                                                txtATraducido.setText(a);
-                                            }else{
-                                                String a=txtATraducido.getText()+tuken2;
-                                                txtATraducido.setText(a);
-                                            }
-                                            
-                                        }
-                                    }else{
-                                       String a= txtATraducido.getText()+ tuken;
-                                       txtATraducido.setText(a);
-                                    }
-                            }
-                            
-                            if(tuken.contains("IT")){
-                                String a=txtATraducido.getText()+"\nIF ";
-                                txtATraducido.setText(a);
-                                /*String loqueva=a+txtATraducido.getText()+" THEN";
-                                txtATraducido.setText(loqueva);*/
-                            }
-                            if(tuken.contains("{")){
-                                String a=txtATraducido.getText()+" THEN\n";
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    if(token1.matches(it3)){
-                        String a=txtATraducido.getText()+"\nEND IF \n";
-                        txtATraducido.setText(a);
-                    }
-                    if(token1.matches(main3)){
-                        
-                        String c=txtATraducido.getText()+"\n";
-                        txtATraducido.setText(c);
-                    }
-                    if(token1.matches(take)){
-                        StringTokenizer st2 = new StringTokenizer(token1,"()");
-                        while(st2.hasMoreTokens()){
-                            String tuken=st2.nextToken();
-                            if(tuken.contains("TAKE")){
-                                
-                                String a=txtATraducido.getText()+"\nINPUT  ";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("+")){
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+",";
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        a=a.replace('#','"');
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                             
-                          
-                            
-                            if (tuken.contains(";")) {
-                                String a=txtATraducido.getText()+"\n";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                                
-                            }
-                            if(tuken.contains("TAKE")==false && tuken.contains("+")==false && tuken.contains(";")==false){
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    
-                     
-                  
-                            /*if(tuken.contains(" ")){
-                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }*/
-                            /*if(tuken.contains("STEP")){
-                                 JOptionPane.showMessageDialog(null,"Encontre STEP");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            if(tuken.matches(entero)){
-                                 JOptionPane.showMessageDialog(null,"Encontre entero");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            if(tuken.contains("TO")){
-                                 JOptionPane.showMessageDialog(null,"Encontre to  ");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito;
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }*/
-                            
-                             /*if(tuken.contains(" ")){
-                                  JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                          if(tuken.matches(to)){
-                              JOptionPane.showMessageDialog(null,"Encontre un TO");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                          
-                            
-                            if (tuken.contains(" ")) {
-                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String a=txtATraducido.getText()+" ";
-                               
-                                txtATraducido.setText(a);
-                                
-                            }*/
-                            /*if(tuken.contains("START")==false && tuken.contains("STEP")==false && tuken.contains("{")==false&& tuken.contains(entero)==false){
-                                 JOptionPane.showMessageDialog(null,"Encontre otra cosa");
-                                 String tokesito="";
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    System.out.println(""+tokesito);
-                                }
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replaceAll(step," ");
-                                txtATraducido.setText(a);
-                            }*/
-                        
-                    
-                     if(token1.matches(send)){
-                        StringTokenizer st2 = new StringTokenizer(token1,"()");
-                        while(st2.hasMoreTokens()){
-                            String tuken=st2.nextToken();
-                            if(tuken.contains("SEND")){
-                                
-                                String a=txtATraducido.getText()+"\nPRINT  ";
-                                a=a.replace('#','"');
-                                
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("+")){
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+",";
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            
-                            if (tuken.contains(";")) {
-                                String a=txtATraducido.getText()+" \n";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("SEND")==false && tuken.contains("+")==false && tuken.contains(";")==false){
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    
-                    if(token1.matches(defVal)){
-                        String tokesito;
-                         StringTokenizer tuk= new StringTokenizer(token1);
-                        while(tuk.hasMoreTokens()){
-                           tokesito=tuk.nextToken();
-                           String a=txtATraducido.getText()+tokesito+"\n";
-                           a=a.replace(';',' ');
-                           txtATraducido.setText(a);
-                        }
-                        
-                    JOptionPane.showMessageDialog(this,"Se encontro una operación");
-                    
-                    }
-                    
-                    //ESTA COSA ES PARA EL CICLO FOR
-                    if(token1.matches(start2)){ //Compara si esta el matches dentro del token
-                        String tokesito="";
-                        String texto="";
-                         StringTokenizer tuk= new StringTokenizer(token1,"\\s");
-                        while(tuk.hasMoreTokens()){
-                           tokesito=tuk.nextToken();
-                           String a=txtATraducido.getText()+"\n";//almacenoo todo
-                           tokesito=tokesito.replace("START","FOR");//reemplazo
-                           tokesito=tokesito.replaceAll(step," ");
-                            tokesito=tokesito.replace("{","\n");
-                           texto+=a+tokesito;//se guarda en el acumulador de lo reemplazado
-                           txtATraducido.setText(texto);
-                           
-                        }
-                       
-                    JOptionPane.showMessageDialog(this,"Se encontro un ciclo for");
-                    
-                    }
-                    
-                    //CICLO FOR
-                    
-              
-                }
-
-    }//GEN-LAST:event_btnTraducirActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Guardarbas();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       Instrctivo in= new Instrctivo();
+    private void instructivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructivoActionPerformed
+    Visual in= new Visual();
        in.show();
-       
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_instructivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1725,7 +1730,7 @@ public class Ventana extends javax.swing.JFrame {
                 if(guarda !=null)
                 {
                     FileWriter  save=new FileWriter(guarda+".txt");
-                    save.write(txtATexto1.getText());
+                    save.write(txtcod.getText());
                     save.close();
                     JOptionPane.showMessageDialog(null,"Se ha guardado el archivo","Información",JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1735,70 +1740,45 @@ public class Ventana extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Su archivo no se ha guardado","Advertencia",JOptionPane.WARNING_MESSAGE);
         } 
-    }         
-        public void Guardarbas()
-    {
-        try
-        {
-            j = new JFileChooser();
-           
-            
-            j.setFileSelectionMode( JFileChooser.FILES_ONLY );
-            FileNameExtensionFilter filtroTxt=new FileNameExtensionFilter("Archivos BAS","bas");
-            j.setFileFilter(filtroTxt);
-            j.setFileHidingEnabled(false);
-            int fin = this.getTitle().lastIndexOf('.');
-            if(fin == -1)fin = this.getTitle().length();
-            j.setSelectedFile(new File(this.getTitle().substring(0,fin)));
-          
-            int select = j.showSaveDialog(this);
-            File guarda = j.getSelectedFile();
-            
-            if(select == JFileChooser.APPROVE_OPTION)
-            {
-                if(guarda !=null)
-                {
-                    FileWriter  save=new FileWriter(guarda+".bas");
-                    save.write(txtATraducido.getText());
-                    save.close();
-                    JOptionPane.showMessageDialog(null,"Se ha guardado el archivo","Información",JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }
-        catch(IOException ex)
-        {
-            JOptionPane.showMessageDialog(null,"Su archivo no se ha guardado","Advertencia",JOptionPane.WARNING_MESSAGE);
-        } 
-    }         
+    }                 
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Compi;
+    private javax.swing.JMenu Ejec;
+    private javax.swing.JMenuItem Ejecuta;
     private javax.swing.JEditorPane Error;
     private javax.swing.JEditorPane LineaError;
     private javax.swing.JEditorPane Lineas;
-    private javax.swing.JButton btnTraducir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JMenuItem MostrarTipoCar;
+    private javax.swing.JMenuItem acerca;
+    private javax.swing.JMenu compilar;
+    private javax.swing.JMenuItem guardar;
+    private javax.swing.JMenuItem instructivo;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JMenuItem lim;
+    private javax.swing.JMenu limpiar;
     private javax.swing.JPanel panel1;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextArea txtATexto1;
     private javax.swing.JTextArea txtATraducido;
+    private javax.swing.JTextArea txtcod;
     // End of variables declaration//GEN-END:variables
 }
