@@ -138,11 +138,13 @@ public class Ventana extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LineaError)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(LineaError, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -897,6 +899,8 @@ public class Ventana extends javax.swing.JFrame {
                                 if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
                                     Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
                                             + "________________________________________________________________________\n" + token);
+                                    Error.setForeground(new Color(235,114,7));
+                                    
                                     for (int j = 1; j < i; j++) {
                                         txt += "\n";
                                     }
@@ -916,6 +920,7 @@ public class Ventana extends javax.swing.JFrame {
                                 if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
                                     Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
                                             + "________________________________________________________________________\n" + token);
+                                    Error.setForeground(new Color(235,114,7));
                                     for (int j = 1; j < i; j++) {
                                         txt += "\n";
                                     }
@@ -935,6 +940,7 @@ public class Ventana extends javax.swing.JFrame {
                                 if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
                                     Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
                                             + "________________________________________________________________________\n" + token);
+                                    Error.setForeground(new Color(235,114,7));
                                     for (int j = 1; j < i; j++) {
                                         txt += "\n";
                                     }
@@ -954,6 +960,7 @@ public class Ventana extends javax.swing.JFrame {
                                 if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
                                     Error.setText("La variable esta repetida (" + tipo + ") " + i + ": \n"
                                             + "________________________________________________________________________\n" + token);
+                                    Error.setForeground(new Color(235,114,7));
                                     for (int j = 1; j < i; j++) {
                                         txt += "\n";
                                     }
@@ -982,6 +989,7 @@ public class Ventana extends javax.swing.JFrame {
                                     if (ENT.contains(tok)); else {
                                         Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                 + "________________________________________________________________________\n" + token);
+                                        Error.setForeground(new Color(235,114,7));
                                         for (int j = 1; j < i; j++) {
                                             txt += "\n";
                                         }
@@ -993,6 +1001,7 @@ public class Ventana extends javax.swing.JFrame {
                                     if (tok.matches(entero)); else {
                                         Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                 + "________________________________________________________________________\n" + token);
+                                        Error.setForeground(new Color(235,114,7));
                                         for (int j = 1; j < i; j++) {
                                             txt += "\n";
                                         }
@@ -1012,6 +1021,7 @@ public class Ventana extends javax.swing.JFrame {
                                         if (DEC.contains(tok)); else {
                                             Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                     + "________________________________________________________________________\n" + token);
+                                            Error.setForeground(new Color(235,114,7));
                                             for (int j = 1; j < i; j++) {
                                                 txt += "\n";
                                             }
@@ -1023,6 +1033,7 @@ public class Ventana extends javax.swing.JFrame {
                                         if (tok.matches(decimal)); else {
                                             Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                     + "________________________________________________________________________\n" + token);
+                                            Error.setForeground(new Color(235,114,7));
                                             for (int j = 1; j < i; j++) {
                                                 txt += "\n";
                                             }
@@ -1034,34 +1045,42 @@ public class Ventana extends javax.swing.JFrame {
                                 }
                             } else {
                                 if (TEXT.contains(ID)) {
-                                    if (comprobar.matches("((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)")); else {
-                                        Error.setText("ERROR SEMÁNTICO " + i + ": \n"
+                                    if (comprobar.matches("((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)")); 
+                                    
+                                        else {
+                                            Error.setText("ERROR SEMÁNTICO " + i + ": \n"
+                                                    + "________________________________________________________________________\n" + token);
+                                            Error.setForeground(new Color(235,114,7));
+                                            for (int j = 1; j < i; j++) {
+                                                txt += "\n";
+                                            }
+                                            LineaError.setText(txt + " ¡!");
+                                            errores = 1;
+                                            break;
+                                            
+                                            }
+                                    
+                                  } else {
+                                        Error.setText("Variable no declarada " + i + ": \n"
                                                 + "________________________________________________________________________\n" + token);
+                                        Error.setForeground(new Color(235,114,7));
                                         for (int j = 1; j < i; j++) {
                                             txt += "\n";
                                         }
                                         LineaError.setText(txt + " ¡!");
                                         errores = 1;
                                         break;
-                                    }
-                                } else {
-                                    Error.setText("Variable no declarada " + i + ": \n"
-                                            + "________________________________________________________________________\n" + token);
-                                    for (int j = 1; j < i; j++) {
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt + " ¡!");
-                                    errores = 1;
-                                    break;
                                 }
                             }
                         }
                     }
                 } else {
+                    
                     if (token.contains("mostrar")) {
                         txtATraducido.setText("");
-                        Error.setText("Error al declarar sentencia mostrar; en la linea " + i + ": \n"
+                        Error.setText("Error al declarar sentencia mostrar en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         errores = 1;
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1071,8 +1090,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("entero") || token.contains("decimal") || token.contains("cadena")) {
-                        Error.setText("Error en declaracion de variables; en la linea " + i + ": \n"
+                        Error.setText("Error en declaracion de variables en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1081,8 +1101,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("leer")) {
-                        Error.setText("Error en lectura de valor leer  en la linea " + i + ": \n"
+                        Error.setText("Error en lectura de valor leer en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1094,6 +1115,7 @@ public class Ventana extends javax.swing.JFrame {
 
                         Error.setText("Cierre de Ciclo para incorrecto  en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1105,6 +1127,7 @@ public class Ventana extends javax.swing.JFrame {
 
                         Error.setText("Inicio de Ciclo para incorrecto  en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1115,6 +1138,7 @@ public class Ventana extends javax.swing.JFrame {
                     if (token.contains("finmientras")) {
                         Error.setText("Cierre de ciclo mientras incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1124,6 +1148,7 @@ public class Ventana extends javax.swing.JFrame {
                     if (token.contains("mientras")) {
                         Error.setText("Inicio de ciclo mientras incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1135,6 +1160,7 @@ public class Ventana extends javax.swing.JFrame {
 
                         Error.setText("Cierre de condicion si incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1144,8 +1170,9 @@ public class Ventana extends javax.swing.JFrame {
                     }
                     if (token.contains("si")) {
 
-                        Error.setText("Inicio de si incorrecto; en la linea " + i + ": \n"
+                        Error.setText("Inicio de si incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1155,6 +1182,7 @@ public class Ventana extends javax.swing.JFrame {
                     } else {
                         Error.setText("Sintaxis Erronea en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1210,7 +1238,7 @@ public class Ventana extends javax.swing.JFrame {
                 }
 
                 if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(principal2) || token.matches(principal3) || token.matches("(\\s)*(\\$)") || token.matches(cicl_para2) || token.matches(cicl_para3) || token.matches(cicl_mien2) || token.matches(cicl_mien3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
-                    Error.setText("Compilado Exitosamente xD lml");
+                    Error.setText("Compilacion exitosa");
                     if (token.matches(principal3)) {
                         eB = 1;
                     }
@@ -1218,6 +1246,7 @@ public class Ventana extends javax.swing.JFrame {
                     if (token.contains("mostrar")) {
                         Error.setText("Error al declarar sentencia mostrar  en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1226,8 +1255,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("entero") || token.contains("decimal") || token.contains("cadena")) {
-                        Error.setText("Error en declaracion de variables  en la linea " + i + ": \n"
+                        Error.setText("Error en declaracion de tipos de variables en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1238,6 +1268,7 @@ public class Ventana extends javax.swing.JFrame {
                     if (token.contains("leer")) {
                         Error.setText("Error en lectura de valor leer en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1246,8 +1277,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("finpara}")) {
-                        Error.setText("Cierre de Ciclo para incorrecto en la linea " + i + ": \n"
+                        Error.setText("Problema de cierre de ciclo para incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1256,8 +1288,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("para")) {
-                        Error.setText("Inicio de Ciclo para incorrecto  en la linea " + i + ": \n"
+                        Error.setText("problema en el inicio del ciclo para en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1266,8 +1299,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("finmientras")) {
-                        Error.setText("Cierre de ciclo WHEN incorrecto  en la linea " + i + ": \n"
+                        Error.setText("Problema de cierre de ciclo mientras en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1276,8 +1310,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("mientras")) {
-                        Error.setText("Inicio de ciclo mientras incorrecto  en la linea " + i + ": \n"
+                        Error.setText("Problema en el inicio del ciclo mientras en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1286,8 +1321,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("finsi")) {
-                        Error.setText("Cierre de condicion si incorrecto; en la linea " + i + ": \n"
+                        Error.setText("Problema de cierre de la condicion si en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1296,8 +1332,9 @@ public class Ventana extends javax.swing.JFrame {
                         break;
                     }
                     if (token.contains("si")) {
-                        Error.setText("Inicio de si incorrecto en la linea " + i + ": \n"
+                        Error.setText("Problema en el inicio del condicional si en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1307,6 +1344,7 @@ public class Ventana extends javax.swing.JFrame {
                     } else {
                         Error.setText("Sintaxis Erronea en la linea " + i + ": \n"
                                 + "\n" + token);
+                        Error.setForeground(new Color(235,7,73));
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
@@ -1317,11 +1355,12 @@ public class Ventana extends javax.swing.JFrame {
                 }
             }
             if (mainE == 0) {
-                Error.setText("Cierre de Clase incorrecto en la Linea " + i + ": \n"
+                Error.setText("Cierre de la funcion principal incorrecto en la linea " + i + ": \n"
                         + "\n" + token);
                 for (int j = 1; j < 1; j++) {
                     txt += "\n";
                 }
+                Error.setForeground(new Color(235,7,45));
                 LineaError.setText(txt + " ¡!");
                 errores = 1;
             }
@@ -1333,7 +1372,7 @@ public class Ventana extends javax.swing.JFrame {
 
             Ejec.setEnabled(true);
             Error.setText("Analisis sintactico exitoso, no se han encontrado errores");
-            Error.setForeground(new Color(0, 255, 0));
+            Error.setForeground(new Color(21,7,235));
         }
     }//GEN-LAST:event_CompiActionPerformed
 
