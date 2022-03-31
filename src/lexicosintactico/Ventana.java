@@ -33,28 +33,26 @@ import javax.swing.table.DefaultTableModel;
  * @author Luis Fer
  */
 public class Ventana extends javax.swing.JFrame {
- FileNameExtensionFilter filtro= new FileNameExtensionFilter("Archivos Word y txt","docx","txt");
+
+    FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos Word y txt", "docx", "txt");
     File f;
-    JFileChooser j= new JFileChooser();
-    String data1 [][]={};
-   String cabecera1[]={"No."," Token "," Tipo"};
+    JFileChooser j = new JFileChooser();
+    String data1[][] = {};
+    String cabecera1[] = {"No.", " Token ", " Tipo"};
     String path;
-    int cont=0;
+    int cont = 0;
     int errores;
-    String mensajini="";
-    String tipo="";
+    String mensajini = "";
+    String tipo = "";
+    EnumerarLineas Enum;
+    
     public Ventana() {
         initComponents();
-//        MetodoLineasC tmpL = new MetodoLineasC();
-//       entrada=tmpL.text_pane;
-//       posicionPuntero(tmpL);
-//       JPanel tmpP = new JPanel(new BorderLayout());
-//       tmpP.add(tmpL,BorderLayout.WEST);
-//       tmpP.add(tmpL.scrollPane,BorderLayout.CENTER);
-//       txtcod.addTab("Consola",tmpP);
+        Enum = new EnumerarLineas(txtcod);
+        jScrollPane4.setRowHeaderView(Enum);
         setResizable(false);
         setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -72,7 +70,6 @@ public class Ventana extends javax.swing.JFrame {
         Error = new javax.swing.JEditorPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        Lineas = new javax.swing.JEditorPane();
         LineaError = new javax.swing.JEditorPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtcod = new javax.swing.JTextArea();
@@ -119,10 +116,6 @@ public class Ventana extends javax.swing.JFrame {
 
         panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 518, 620, 120));
 
-        Lineas.setEditable(false);
-        Lineas.setText("1");
-        Lineas.setOpaque(false);
-
         LineaError.setEditable(false);
         LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         LineaError.setForeground(java.awt.Color.red);
@@ -139,15 +132,12 @@ public class Ventana extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(LineaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(Lineas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Lineas)
             .addComponent(LineaError)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -442,82 +432,81 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       //Se crea un jfilechooser
-       j.setCurrentDirectory(new File("src\\lexicosintactico"));
-       j.getSelectedFile();
+        //Se crea un jfilechooser
+        j.setCurrentDirectory(new File("src\\lexicosintactico"));
+        j.getSelectedFile();
         j.setFileFilter(filtro);//Añado el filtro
         j.showOpenDialog(j);
-       
-        int contPalabra=0;//Creo un contador para las palabras
-       try{
-         //Aqui se manda la ruta del archivo
-        path= j.getSelectedFile().getAbsolutePath();//Obtiene la Ruta
-        String name=j.getSelectedFile().getName();//Obtiene el nombre
-        String lectura="";
-        f = new File(path);
-         
-        try{
 
-            FileReader fr = new FileReader(f);
-            BufferedReader br = new BufferedReader(fr);
-            String aux;
-       //Aqui cuento cuantas palabras hay
-       StreamTokenizer st=new StreamTokenizer(new FileReader(f));
-       while(st.nextToken()!=StreamTokenizer.TT_EOF){
-          if(st.ttype==StreamTokenizer.TT_WORD){
-              contPalabra++;
-              
-          } 
-          //lblPalabras.setText("Total de Palabras:"+contPalabra);
-          //txtNombre.setText(name);
-          //txtRuta.setText(path);
-         
-       }
-       
-       
-       //Aqui empieza a leer el archivo linea por linea hasta que en el texto ya no haya nada
-       
-            while((aux = br.readLine())!=null)
+        int contPalabra = 0;//Creo un contador para las palabras
+        try {
+            //Aqui se manda la ruta del archivo
+            path = j.getSelectedFile().getAbsolutePath();//Obtiene la Ruta
+            String name = j.getSelectedFile().getName();//Obtiene el nombre
+            String lectura = "";
+            f = new File(path);
 
-               lectura = lectura+aux+"\n";//Voy acumulando todo en un string
+            try {
 
-        }catch(IOException e){}
+                FileReader fr = new FileReader(f);
+                BufferedReader br = new BufferedReader(fr);
+                String aux;
+                //Aqui cuento cuantas palabras hay
+                StreamTokenizer st = new StreamTokenizer(new FileReader(f));
+                while (st.nextToken() != StreamTokenizer.TT_EOF) {
+                    if (st.ttype == StreamTokenizer.TT_WORD) {
+                        contPalabra++;
+
+                    }
+                    //lblPalabras.setText("Total de Palabras:"+contPalabra);
+                    //txtNombre.setText(name);
+                    //txtRuta.setText(path);
+
+                }
+
+                //Aqui empieza a leer el archivo linea por linea hasta que en el texto ya no haya nada
+                while ((aux = br.readLine()) != null) {
+                    lectura = lectura + aux + "\n";//Voy acumulando todo en un string
+                }
+            } catch (IOException e) {
+            }
 
             txtcod.setText(lectura);//Mando lo que resulto de la lectura
-            int contador=0;
-        StringTokenizer st = new StringTokenizer(txtcod.getText(),"\n",true);
-                String Text = "",token;
-                contador = 1;
+            int contador = 0;
+            StringTokenizer st = new StringTokenizer(txtcod.getText(), "\n", true);
+            String Text = "", token;
+            contador = 1;
 
-                while (st.hasMoreTokens()){
-                    token= st.nextToken();
-                    if("\n".equals(token)) contador++;
+            while (st.hasMoreTokens()) {
+                token = st.nextToken();
+                if ("\n".equals(token)) {
+                    contador++;
                 }
+            }
 
-                for(int i = 1; i <= contador; i++){
-                    Text += i+"\n";
-                }
-                Lineas.setText(Text);    
-            
-             //contarCaracteres(lectura);//Mando llamar el metodo de contar caracteres
-             //mayusculasyminusculas(lectura);
-         }catch(NullPointerException e){
+            for (int i = 1; i <= contador; i++) {
+                Text += i + "\n";
+            }
+
+            //contarCaracteres(lectura);//Mando llamar el metodo de contar caracteres
+            //mayusculasyminusculas(lectura);
+        } catch (NullPointerException e) {
 
             javax.swing.JOptionPane.showMessageDialog(j, "Has seleccionado cerrar programa, saliendo...");
 
-        System.exit(0);
+            System.exit(0);
 
-}
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void MostrarTipoCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarTipoCarActionPerformed
 
-        HashMap <String,Integer> r = new HashMap<>();
-        HashMap <String,Integer> op = new HashMap<>();
-        HashMap <String,Integer> id = new HashMap<>();
-        HashMap <String,Integer> deli = new HashMap<>();
-        HashMap <String,Integer> num = new HashMap<>();
-        LinkedList <String> texto = new LinkedList<>();
+        HashMap<String, Integer> r = new HashMap<>();
+        HashMap<String, Integer> op = new HashMap<>();
+        HashMap<String, Integer> id = new HashMap<>();
+        HashMap<String, Integer> deli = new HashMap<>();
+        HashMap<String, Integer> num = new HashMap<>();
+        LinkedList<String> texto = new LinkedList<>();
 
         r.put("comienzo", 0);
         r.put("fin", 0);
@@ -556,44 +545,47 @@ public class Ventana extends javax.swing.JFrame {
         deli.put("}", 0);
         deli.put(")", 0);
         deli.put(",", 0);
-        deli.put("(",0);
+        deli.put("(", 0);
 
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Token","Cantidad","Tipo"});
+        model.setColumnIdentifiers(new Object[]{"Token", "Cantidad", "Tipo"});
 
-        StringTokenizer st = new StringTokenizer(txtcod.getText(),"{}();,\"=+-*/><||&&# \n\t",true);
+        StringTokenizer st = new StringTokenizer(txtcod.getText(), "{}();,\"=+-*/><||&&# \n\t", true);
         String token, text = "";
-        while (st.hasMoreTokens()){
+        while (st.hasMoreTokens()) {
             token = st.nextToken();
-            if(!" ".equals(token) && !"\n".equals(token) && !"\t".equals(token)){
+            if (!" ".equals(token) && !"\n".equals(token) && !"\t".equals(token)) {
                 if (r.containsKey(token)) {
-                    r.put(token, r.get(token)+1);
-                }else {
+                    r.put(token, r.get(token) + 1);
+                } else {
                     if (op.containsKey(token)) {
-                        op.put(token, op.get(token)+1);
-                    }else {
-                        if (deli.containsKey(token)){
-                            deli.put(token, deli.get(token)+1);
-                            if("#".equals(token)){
+                        op.put(token, op.get(token) + 1);
+                    } else {
+                        if (deli.containsKey(token)) {
+                            deli.put(token, deli.get(token) + 1);
+                            if ("#".equals(token)) {
                                 token = st.nextToken();
-                                while (st.hasMoreTokens() && !"#".equals(token)){
+                                while (st.hasMoreTokens() && !"#".equals(token)) {
                                     text += token;
                                     token = st.nextToken();
                                 }
                                 texto.add(text);
-                                deli.put(token, deli.get(token)+1);
+                                deli.put(token, deli.get(token) + 1);
                                 text = "";
                             }
-                        }else {
+                        } else {
                             if (id.containsKey(token)) {
-                                id.put(token, id.get(token)+1);
-                            }else {
-                                if(token.matches("([0-9]*)|([0-9]*.[0-9]+)")) {
+                                id.put(token, id.get(token) + 1);
+                            } else {
+                                if (token.matches("([0-9]*)|([0-9]*.[0-9]+)")) {
                                     if (num.containsKey(token)) {
-                                        num.put(token, num.get(token)+1);
-                                    }else num.put(token, 1);
+                                        num.put(token, num.get(token) + 1);
+                                    } else {
+                                        num.put(token, 1);
+                                    }
+                                } else {
+                                    id.put(token, 1);
                                 }
-                                else id.put(token, 1);
                             }
                         }
                     }
@@ -602,57 +594,71 @@ public class Ventana extends javax.swing.JFrame {
         }
 
         Iterator<String> itr = r.keySet().iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             token = itr.next();
-            if(r.get(token) > 0)model.addRow(new Object[]{token, r.get(token),"Palabra Reservada"});
+            if (r.get(token) > 0) {
+                model.addRow(new Object[]{token, r.get(token), "Palabra Reservada"});
+            }
         }
         itr = op.keySet().iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             token = itr.next();
-            if(op.get(token) > 0) model.addRow(new Object[]{token, op.get(token),"Operador"});
+            if (op.get(token) > 0) {
+                model.addRow(new Object[]{token, op.get(token), "Operador"});
+            }
         }
         itr = deli.keySet().iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             token = itr.next();
-            if(deli.get(token) > 0) model.addRow(new Object[]{token, deli.get(token),"Delimitador"});
+            if (deli.get(token) > 0) {
+                model.addRow(new Object[]{token, deli.get(token), "Delimitador"});
+            }
         }
         itr = id.keySet().iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             token = itr.next();
-            if(id.get(token) > 0) model.addRow(new Object[]{token, id.get(token),"Identificador"});
+            if (id.get(token) > 0) {
+                model.addRow(new Object[]{token, id.get(token), "Identificador"});
+            }
         }
         itr = num.keySet().iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             token = itr.next();
-            if(num.get(token) > 0) {
-                if(token.matches("[0-9]+"))model.addRow(new Object[]{token, num.get(token),"Número"});
-                if(token.matches("[0-9]+.[0-9]+"))model.addRow(new Object[]{token, num.get(token),"Número Decimal"});
+            if (num.get(token) > 0) {
+                if (token.matches("[0-9]+")) {
+                    model.addRow(new Object[]{token, num.get(token), "Número"});
+                }
+                if (token.matches("[0-9]+.[0-9]+")) {
+                    model.addRow(new Object[]{token, num.get(token), "Número Decimal"});
+                }
             }
         }
         itr = texto.iterator();
-        while(itr.hasNext()){
-            model.addRow(new Object[]{itr.next(), "1","Texto"});
+        while (itr.hasNext()) {
+            model.addRow(new Object[]{itr.next(), "1", "Texto"});
 
         }
        
-        tabla.setModel(model);
+        
+     tabla.setModel(model);
     }//GEN-LAST:event_MostrarTipoCarActionPerformed
 
+    
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void compilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compilarActionPerformed
-        
-          
+
+
     }//GEN-LAST:event_compilarActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
-  
+
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void EjecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecActionPerformed
-     
+
     }//GEN-LAST:event_EjecActionPerformed
 
     private void limActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limActionPerformed
@@ -664,1012 +670,690 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_limActionPerformed
 
     private void EjecutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaActionPerformed
-     txtATraducido.setText("");
-        String
-               simbolo = "([=<>])",
+        txtATraducido.setText("");
+        String simbolo = "([=<>])",
                 id = "([(a-z)(A-Z)](\\w)*)",
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)",
-                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
+                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*leer(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "(("+id+"|"+num+"|"+dec+")(\\s)*([+-/*](\\s)*("+id+"|"+num+"|"+dec+"))+)",
-                defVal = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*(;))",
-                defValVar = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*)",
-                condicion = id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")((\\s)*([(&&)(||)](\\s)*"+id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")))*",
-                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
-                main = "((\\s)*"+id+"txtATraducidocomienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
+                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*(;))",
+                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
+                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
+                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
+                main = "((\\s)*" + id + "txtATraducidocomienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                main2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
                 main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
-                
-               start2 = "((\\s)*para(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
-                foresito = "((\\s)*FOR(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*)",
+                start2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
+                foresito = "((\\s)*FOR(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*)",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-               when3 = "((\\s)*finmientras(\\s)*(\\}))",
-                it2 = "((\\s)*si(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                it2 = "((\\s)*si(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 it3 = "((\\s)*finsi(\\s)*(\\}))",
-                 entero = "[0-9]*",
-                step="(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)",
-                to="hasta(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{)",
+                entero = "[0-9]*",
+                step = "(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)",
+                to = "hasta(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{)",
                 decimal = "[0-9]*.[0-9]+";
 
-                StringTokenizer st = new StringTokenizer(txtcod.getText(),"\n");
-                String token;
-                while (st.hasMoreTokens()){
-                    //JOptionPane.showMessageDialog(this,"Identificando Variables...");
-                    token = st.nextToken();
-                    
-                    if(token.matches(main2))
-                    {
-                        
-                        String tokinn="'";
-                        StringTokenizer tokin = new StringTokenizer(token," \n");
-                        while(tokin.hasMoreTokens()){
-                            String testo="";
-                            testo=testo+txtATraducido.getText();
-                            tokinn=tokin.nextToken();
-                            if(tokinn.contains("comienzo")){
-                                txtATraducido.setText(testo+"REM ");
+        StringTokenizer st = new StringTokenizer(txtcod.getText(), "\n");
+        String token;
+        while (st.hasMoreTokens()) {
+            //JOptionPane.showMessageDialog(this,"Identificando Variables...");
+            token = st.nextToken();
 
-                            }
-                            if  (tokinn.matches(id) && tokinn.contains("comienzo")==false  && tokinn.contains("{")==false){
-                                txtATraducido.setText("Iniciando ejecucion;\n...\n "+testo+tokinn+"");
-                            }
-                            if(tokinn.contains("{")){
-                                txtATraducido.setText(testo+" ;\n");
-                            }
-                        }
+            if (token.matches(main2)) {
+
+                String tokinn = "'";
+                StringTokenizer tokin = new StringTokenizer(token, " \n");
+                while (tokin.hasMoreTokens()) {
+                    String testo = "";
+                    testo = testo + txtATraducido.getText();
+                    tokinn = tokin.nextToken();
+                    if (tokinn.contains("comienzo")) {
+                        txtATraducido.setText(testo + " ");
 
                     }
-
-                    if(token.matches(var)){
-                        String a ="";
-                        a=txtATraducido.getText();
-                        a=a+"DIM  ";
-                        txtATraducido.setText(a);
-                        String tokinn="";
-                        StringTokenizer tokin = new StringTokenizer(token," \n,;");
-                        while(tokin.hasMoreTokens()){
-                                String testo="";
-                                testo=testo+txtATraducido.getText();
-                                tokinn=tokin.nextToken();
-                                
-                                if(tokinn.contains("entero") || tokinn.contains("decimal") || tokinn.contains("cadena")){
-                                    String enteros="";
-                                    if(tokinn.contains("entero")){
-                                     enteros=" AS INTEGER";
-                                    }
-                                    if(tokinn.contains("decimal")){
-                                     enteros=" AS DOUBLE";
-                                    }
-                                    if(tokinn.contains("cadena")){
-                                     enteros=" AS STRING";
-                                    }
-
-                                    int contador=0;
-                                    while(tokin.hasMoreTokens()){
-                                        tokinn=tokin.nextToken();
-                                        if(tokinn.equals(";")){
-
-                                        }else{
-                                          if(contador>=1){
-                                          enteros=tokinn+","+enteros;
-                                          }else{
-                                          enteros=tokinn+enteros;
-                                          }
-                                        }
-                                        contador+=1;
-                                    }
-                                    txtATraducido.setText(testo+enteros+"\n");
-                                }
-
-                        }
+                    if (tokinn.matches(id) && tokinn.contains("comienzo") == false && tokinn.contains("{") == false) {
+                        txtATraducido.setText("Iniciando ejecucion;\n...\n " + "");
                     }
-
+                    if (tokinn.contains("{")) {
+                        txtATraducido.setText(testo + " ;\n");
+                    }
                 }
-                String b=txtATraducido.getText();
-                b=b+"  \n";
-                txtATraducido.setText(b);
-                
-                
-                StringTokenizer st1 = new StringTokenizer(txtcod.getText(),"\n");
-                String token1;
-                while (st1.hasMoreTokens()){
-                    //JOptionPane.showMessageDialog(this,"Identificando Instrucciones...");
-                    token1 = st1.nextToken();
-                    //JOptionPane.showMessageDialog(this,token1);
-                  
-                    /*if(token1.matches(start2)){
-                      
-                        String a=txtATraducido.getText()+"\nFOR ";
-                        txtATraducido.setText(a);
-                        StringTokenizer st2= new StringTokenizer(token1,"()");
-                    }*/
-                    if(token1.matches(start3)){
-                        //JOptionPane.showMessageDialog(this,"Termina FOR");
-                        String a=txtATraducido.getText()+"\nNEXT\n";
-                        txtATraducido.setText(a);
-                    }
-                   if(token1.matches(when2)){
-                        StringTokenizer st2= new StringTokenizer (token1,"()");
-                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
-                            String tuken= st2.nextToken();
-                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
-                                    if(tuken.contains("=")){
-                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
-                                        while(st3.hasMoreTokens()){
-                                            String tuken2=st3.nextToken();
-                                            
-                                            if(st3.hasMoreTokens()==true){
-                                                String a=txtATraducido.getText()+tuken2+"=";
-                                                txtATraducido.setText(a);
-                                            }else{
-                                                String a=txtATraducido.getText()+tuken2;
-                                                txtATraducido.setText(a);
-                                            }
-                                            
-                                        }
-                                    }else{
-                                       String a= txtATraducido.getText()+ tuken;
-                                       txtATraducido.setText(a);
-                                    }
-                            }
-                            
-                            if(tuken.contains("mientras")){
-                                String a=txtATraducido.getText()+"\nWHILE ";
-                                txtATraducido.setText(a);
-                                /*String loqueva=a+txtATraducido.getText()+" THEN";
-                                txtATraducido.setText(loqueva);*/
-                            }
-                            if(tuken.contains("{")){
-                                String a=txtATraducido.getText()+"\n";
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    if(token1.matches(when3)){
-                        String a=txtATraducido.getText()+"\nWEND \n";
+
+            }
+
+        }
+
+        StringTokenizer st1 = new StringTokenizer(txtcod.getText(), "\n");
+        String token1;
+        while (st1.hasMoreTokens()) {
+
+            token1 = st1.nextToken();
+
+            if (token1.matches(send)) {
+                StringTokenizer st2 = new StringTokenizer(token1, "()");
+                while (st2.hasMoreTokens()) {
+                    String tuken = st2.nextToken();
+                    if (tuken.contains("mostrar")) {
+
+                        String a = txtATraducido.getText() + "\n  ";
+                        a = a.replace('#', '"');
+
                         txtATraducido.setText(a);
                     }
-                    if(token1.matches(it2)){
-                        StringTokenizer st2= new StringTokenizer (token1,"()");
-                        while(st2.hasMoreTokens()){ // poner primero por espacio con tokens y luego dentro de espacio hacer ciclo y hacer tokens por cada uno
-                            String tuken= st2.nextToken();
-                                if( tuken.contains("=") || tuken.contains("<") || tuken.contains(">")){
-                                    if(tuken.contains("=")){
-                                        StringTokenizer st3= new StringTokenizer (tuken,"=");
-                                        while(st3.hasMoreTokens()){
-                                            String tuken2=st3.nextToken();
-                                            
-                                            if(st3.hasMoreTokens()==true){
-                                                String a=txtATraducido.getText()+tuken2+"=";
-                                                txtATraducido.setText(a);
-                                            }else{
-                                                String a=txtATraducido.getText()+tuken2;
-                                                txtATraducido.setText(a);
-                                            }
-                                            
-                                        }
-                                    }else{
-                                       String a= txtATraducido.getText()+ tuken;
-                                       txtATraducido.setText(a);
-                                    }
-                            }
-                            
-                            if(tuken.contains("si")){
-                                String a=txtATraducido.getText()+"\nIF ";
-                                txtATraducido.setText(a);
-                                /*String loqueva=a+txtATraducido.getText()+" THEN";
-                                txtATraducido.setText(loqueva);*/
-                            }
-                            if(tuken.contains("{")){
-                                String a=txtATraducido.getText()+" THEN\n";
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    if(token1.matches(it3)){
-                        String a=txtATraducido.getText()+"\nfin IF \n";
-                        txtATraducido.setText(a);
-                    }
-                    if(token1.matches(main3)){
-                        
-                        String c=txtATraducido.getText()+"\n";
-                        txtATraducido.setText(c);
-                    }
-                    if(token1.matches(take)){
-                        StringTokenizer st2 = new StringTokenizer(token1,"()");
-                        while(st2.hasMoreTokens()){
-                            String tuken=st2.nextToken();
-                            if(tuken.contains("leer")){
-                                
-                                String a=txtATraducido.getText()+"\nINPUT  ";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("+")){
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+",";
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        a=a.replace('#','"');
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                             
-                          
-                            
-                            if (tuken.contains(";")) {
-                                String a=txtATraducido.getText()+"\n";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                                
-                            }
-                            if(tuken.contains("leer")==false && tuken.contains("+")==false && tuken.contains(";")==false){
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    
-                     
-                  
-                            /*if(tuken.contains(" ")){
-                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }*/
-                            /*if(tuken.contains("con_paso")){
-                                 JOptionPane.showMessageDialog(null,"Encontre con_paso");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            if(tuken.matches(entero)){
-                                 JOptionPane.showMessageDialog(null,"Encontre entero");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            if(tuken.contains("hasta")){
-                                 JOptionPane.showMessageDialog(null,"Encontre to  ");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito;
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }*/
-                            
-                             /*if(tuken.contains(" ")){
-                                  JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                          if(tuken.matches(to)){
-                              JOptionPane.showMessageDialog(null,"Encontre un hasta");
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+" ";
-                                       
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                      
-                                        
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                          
-                            
-                            if (tuken.contains(" ")) {
-                                 JOptionPane.showMessageDialog(null,"Encontre espacio");
-                                String a=txtATraducido.getText()+" ";
-                               
-                                txtATraducido.setText(a);
-                                
-                            }*/
-                            /*if(tuken.contains("para")==false && tuken.contains("con_paso")==false && tuken.contains("{")==false&& tuken.contains(entero)==false){
-                                 JOptionPane.showMessageDialog(null,"Encontre otra cosa");
-                                 String tokesito="";
-                                StringTokenizer tuk= new StringTokenizer(tuken," ");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    System.out.println(""+tokesito);
-                                }
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replaceAll(step," ");
-                                txtATraducido.setText(a);
-                            }*/
-                        
-                    
-                     if(token1.matches(send)){
-                        StringTokenizer st2 = new StringTokenizer(token1,"()");
-                        while(st2.hasMoreTokens()){
-                            String tuken=st2.nextToken();
-                            if(tuken.contains("mostrar")){
-                                
-                                String a=txtATraducido.getText()+"\n  ";
-                                a=a.replace('#','"');
-                                
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("+")){
-                                String tokesito;
-                                StringTokenizer tuk= new StringTokenizer(tuken,"+");
-                                while(tuk.hasMoreTokens()){
-                                    tokesito=tuk.nextToken();
-                                    if(tuk.hasMoreTokens()){
-                                        String a=txtATraducido.getText()+tokesito+",";
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }else{
-                                        String a=txtATraducido.getText()+tokesito;
-                                        a=a.replace('#','"');
-                                        txtATraducido.setText(a);
-                                    }
-                                }
-                            }
-                            
-                            if (tuken.contains(";")) {
-                                String a=txtATraducido.getText()+" \n";
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                            if(tuken.contains("mostrar")==false && tuken.contains("+")==false && tuken.contains(";")==false){
-                                String a=txtATraducido.getText()+tuken;
-                                a=a.replace('#','"');
-                                txtATraducido.setText(a);
-                            }
-                        }
-                    }
-                    
-                    if(token1.matches(defVal)){
+                    if (tuken.contains("+")) {
                         String tokesito;
-                         StringTokenizer tuk= new StringTokenizer(token1);
-                        while(tuk.hasMoreTokens()){
-                           tokesito=tuk.nextToken();
-                           String a=txtATraducido.getText()+tokesito+"\n";
-                           a=a.replace(';',' ');
-                           txtATraducido.setText(a);
+                        StringTokenizer tuk = new StringTokenizer(tuken, "+");
+                        while (tuk.hasMoreTokens()) {
+                            tokesito = tuk.nextToken();
+                            if (tuk.hasMoreTokens()) {
+                                String a = txtATraducido.getText() + tokesito + ",";
+                                a = a.replace('#', '"');
+                                txtATraducido.setText(a);
+                            } else {
+                                String a = txtATraducido.getText() + tokesito;
+                                a = a.replace('#', '"');
+                                txtATraducido.setText(a);
+                            }
                         }
-                        
-                    JOptionPane.showMessageDialog(this,"Se encontro una operación");
-                    
                     }
-                    
-                    //ESTA COSA ES PARA EL CICLO FOR
-                    if(token1.matches(start2)){ //Compara si esta el matches dentro del token
-                        String tokesito="";
-                        String texto="";
-                         StringTokenizer tuk= new StringTokenizer(token1,"\\s");
-                        while(tuk.hasMoreTokens()){
-                           tokesito=tuk.nextToken();
-                           String a=txtATraducido.getText()+"\n";//almacenoo todo
-                           tokesito=tokesito.replace("para","FOR");//reemplazo
-                           tokesito=tokesito.replaceAll(step," ");
-                            tokesito=tokesito.replace("{","\n");
-                           texto+=a+tokesito;//se guarda en el acumulador de lo reemplazado
-                           txtATraducido.setText(texto);
-                           
-                        }
-                       
-                    JOptionPane.showMessageDialog(this,"Se encontro un ciclo for");
-                    
+
+                    if (tuken.contains(";")) {
+                        String a = txtATraducido.getText() + " \n";
+                        a = a.replace('#', '"');
+                        txtATraducido.setText(a);
                     }
-                    
-                    //CICLO FOR
-                    
-              
+                    if (tuken.contains("mostrar") == false && tuken.contains("+") == false && tuken.contains(";") == false) {
+                        String a = txtATraducido.getText() + tuken;
+                        a = a.replace('#', '"');
+                        txtATraducido.setText(a);
+                    }
                 }
+            }
+
+            if (token1.matches(defVal)) {
+
+                JOptionPane.showMessageDialog(this, "Se encontró una operación");
+            }
+
+            if (token1.matches(start2)) {
+                JOptionPane.showMessageDialog(this, "Se encontró un ciclo for");
+
+            }
+            if (token1.matches(send)) {
+                JOptionPane.showMessageDialog(this, "Se encontró un mensaje");
+
+            }
+            if (token1.matches(it2)) {
+                JOptionPane.showMessageDialog(this, "Se encontró un condicional si");
+
+            }
+            if (token1.matches(when2)) {
+                JOptionPane.showMessageDialog(this, "Se encontró un ciclo cuando");
+
+            }
+            if (token1.matches(take)) {
+                JOptionPane.showMessageDialog(this, "Se encontró una lectura de variable");
+
+            }
+
+        }
     }//GEN-LAST:event_EjecutaActionPerformed
 
     private void CompiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompiActionPerformed
-          errores=0;
-        LinkedList <String> ENT = new LinkedList<>();
-        LinkedList <String> DEC = new LinkedList<>();
-        LinkedList <String> TEXT = new LinkedList<>();
-        LinkedList <String> leer = new LinkedList<>();
-        
-        String
-                simbolo = "([=<>])",
+
+        errores = 0;
+        LinkedList<String> ENT = new LinkedList<>();
+        LinkedList<String> DEC = new LinkedList<>();
+        LinkedList<String> TEXT = new LinkedList<>();
+        LinkedList<String> leer = new LinkedList<>();
+
+        String simbolo = "([=<>])",
                 id = "([(a-z)(A-Z)](\\w)*)",
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)",
-                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
+                text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
+                send = "((\\s)*mostrar(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*leer(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|("+id+"))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|("+id+")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "(("+id+"|"+num+"|"+dec+")(\\s)*([+-/*](\\s)*("+id+"|"+num+"|"+dec+"))+)",
-                defVal = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*(;))",
-                defValVar = "((\\s)*"+id+"(\\s)*=(\\s)*("+id+"|"+text+"|"+operaciones+"|"+num+"|"+dec+")(\\s)*)",
-                condicion = id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")((\\s)*([(&&)(||)](\\s)*"+id+"(\\s)*"+simbolo+"(\\s)*("+id+"|"+num+"|"+dec+")))*",
-                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*("+id+"|"+defValVar+")((\\s)*(,(\\s)*("+id+"|"+defValVar+")))*(\\s)*(;))",
-                main = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*"+id+"(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                take = "((\\s)*leer(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
+                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*(;))",
+                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
+                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
+                var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
+                main = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                main2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
                 main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
-                
-               start2 = "((\\s)*para(\\b)(\\s)*("+id+"|"+num+")(\\b)(\\s)*(=)*("+id+"|"+num+")(\\b)(\\s)*(con_paso)(\\b)(\\s)*"+num+"(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*("+id+"|"+num+")(\\s)*(\\{))",
+                start2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
-               when3 = "((\\s)*finmientras(\\s)*(\\}))",
-                it2 = "((\\s)*si(\\s)*(\\()(\\s)*"+condicion+"(\\s)*(\\))(\\s)*(\\{))",
+                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                it2 = "((\\s)*si(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 it3 = "((\\s)*finsi(\\s)*(\\}))",
-                 entero = "[0-9]*",
+                entero = "[0-9]*",
                 decimal = "[0-9]*.[0-9]+";
-        
-                
-                LinkedList <Integer> error = new LinkedList<>();
-                StringTokenizer st = new StringTokenizer(txtcod.getText(),";{}",true);
-                String token = "", txt = "", e;
-                int i = 1, mainE = 0, start = 0, when = 0, it = 0, eB = 0;
-                Error.setText("");
-                
-                if(txtcod.getText().matches(main)) {
-                    
-                    while (st.hasMoreTokens()){
-                        token = st.nextToken();
-                        if(st.hasMoreTokens())token = token+st.nextToken();
-                        if(token.matches("[.\\W\\w\\s]*(\\})") && st.countTokens() == 1){
-                            String auxTok = st.nextToken();
-                            token = token+(auxTok.substring(0,auxTok.indexOf("\n")));
-                        }
-                            StringTokenizer lin = new StringTokenizer(token,"\n",true);
-                            while (lin.hasMoreTokens()){
-                                e = lin.nextToken();
-                                if("\n".equals(e)) i++;
-                            }
-                            
-                            if(token.matches(start2)) start++;
-                            if(token.matches(start3)) start--;
-                            if(token.matches(when2)) when++;
-                            if(token.matches(when3)) when--;
-                            if(token.matches(it2)) it++;
-                            if(token.matches(it3)) it--;
-                            if((st.hasMoreTokens() == false && (start > 0 || when > 0 || it > 0)) || (start < 0 || when < 0 || it < 0)) eB = 1;
-                            
-                            if((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0){
-                               if(token.matches(take)){
-                                   
-                               }
-                                if(token.matches(var)){
-                                    StringTokenizer stTipo = new StringTokenizer(token," ,;");
-                                    String tipo = stTipo.nextToken();
-                                    
-                                    if(tipo.contains("entero")){
-                                        
-                                        while(stTipo.hasMoreTokens()){
-                                            tipo = stTipo.nextToken();
-                                            
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
-                                                Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
-                                                               + "________________________________________________________________________\n"+token);
-                                                for(int j = 1; j <i; j++){
-                                                    txt += "\n";
-                                                }
-                                                LineaError.setText(txt+" ¡!");
-                                                errores=1;
-                                                break;
-                                            }
-                                            
-                                            ENT.add(tipo);
-                                        }
-                                    }
-                                    if(tipo.contains("decimal")){
-                                        
-                                        while(stTipo.hasMoreTokens()){
-                                            tipo = stTipo.nextToken();
-                                            
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
-                                                Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
-                                                               + "________________________________________________________________________\n"+token);
-                                                for(int j = 1; j <i; j++){
-                                                    txt += "\n";
-                                                }
-                                                LineaError.setText(txt+" ¡!");
-                                                 errores=1;
-                                                break;
-                                            }
-                                            
-                                            DEC.add(tipo);
-                                        }
-                                    }
-                                    if(tipo.contains("leer")){
-                                       
-                                        
-                                        while(stTipo.hasMoreTokens()){
-                                            tipo = stTipo.nextToken();
-                                            
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
-                                                Error.setText("La Variable esta repetida ("+tipo+") "+i+": \n"
-                                                               + "________________________________________________________________________\n"+token);
-                                                for(int j = 1; j <i; j++){
-                                                    txt += "\n";
-                                                }
-                                                LineaError.setText(txt+" ¡!");
-                                                 errores=1;
-                                                break;
-                                            }
-                                            
-                                            leer.add(tipo);
-                                        }
-                                    }
-                                    if(tipo.contains("cadena")){
-                                       
-                                        while(stTipo.hasMoreTokens()){
-                                            tipo = stTipo.nextToken();
-                                            
-                                            if(ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo)|| leer.contains(tipo)){
-                                                Error.setText("La variable esta repetida ("+tipo+") "+i+": \n"
-                                                               + "________________________________________________________________________\n"+token);
-                                                for(int j = 1; j <i; j++){
-                                                    txt += "\n";
-                                                }
-                                                LineaError.setText(txt+" ¡!");
-                                                 errores=1;
-                                                break;
-                                            }
-                                            
-                                            TEXT.add(tipo);
-                                        }
-                                    }
-                                }
-                                if(token.matches(defVal)){
-                                    StringTokenizer stComprobar = new StringTokenizer(token," \n\t=;");
-                                    String ID = stComprobar.nextToken(), comprobar = "", tok = "";
-                                    //System.out.print(ID);
-                                    while(stComprobar.hasMoreTokens()){
-                                            comprobar += stComprobar.nextToken();
-                                        }
-                                    
-                                    if(ENT.contains(ID)){
-                                        StringTokenizer stComprobarE = new StringTokenizer(comprobar,"+*/-");
-                                        while(stComprobarE.hasMoreTokens()){
-                                            tok = stComprobarE.nextToken();
-                                            
-                                            if(tok.matches(id)){
-                                                if(ENT.contains(tok));
-                                                else{
-                                                    Error.setText("ERROR SEMÁNTICO ("+tok+") "+i+": \n"
-                                                                    + "________________________________________________________________________\n"+token);
-                                                    for(int j = 1; j <i; j++){
-                                                        txt += "\n";
-                                                    }
-                                                    LineaError.setText(txt+" ¡!");
-                                                     errores=1;
-                                                    break;
-                                                }
-                                            }
-                                            else{
-                                                if(tok.matches(entero));
-                                                else{
-                                                    Error.setText("ERROR SEMÁNTICO ("+tok+") "+i+": \n"
-                                                                    + "________________________________________________________________________\n"+token);
-                                                    for(int j = 1; j <i; j++){
-                                                        txt += "\n";
-                                                    }
-                                                    LineaError.setText(txt+" ¡!");
-                                                     errores=1;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        if(DEC.contains(ID)){
-                                            StringTokenizer stComprobarD = new StringTokenizer(comprobar,"+*/-");
-                                            while(stComprobarD.hasMoreTokens()){
-                                                tok = stComprobarD.nextToken();
 
-                                                if(tok.matches(id)){
-                                                    if(DEC.contains(tok));
-                                                    else{
-                                                        Error.setText("ERROR SEMÁNTICO ("+tok+") "+i+": \n"
-                                                                        + "________________________________________________________________________\n"+token);
-                                                        for(int j = 1; j <i; j++){
-                                                            txt += "\n";
-                                                        }
-                                                        LineaError.setText(txt+" ¡!");
-                                                         errores=1;
-                                                        break;
-                                                    }
-                                                }
-                                                else{
-                                                    if(tok.matches(decimal));
-                                                    else{
-                                                        Error.setText("ERROR SEMÁNTICO ("+tok+") "+i+": \n"
-                                                                        + "________________________________________________________________________\n"+token);
-                                                        for(int j = 1; j <i; j++){
-                                                            txt += "\n";
-                                                        }
-                                                        LineaError.setText(txt+" ¡!");
-                                                         errores=1;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else {
-                                            if(TEXT.contains(ID)){
-                                                   if(comprobar.matches("((((\")[.\\W\\w\\s]*(\"))|("+id+"))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|("+id+")))*)"));
-                                                   else {
-                                                       Error.setText("ERROR SEMÁNTICO "+i+": \n"
-                                                                        + "________________________________________________________________________\n"+token);
-                                                        for(int j = 1; j <i; j++){
-                                                            txt += "\n";
-                                                        }
-                                                        LineaError.setText(txt+" ¡!");
-                                                         errores=1;
-                                                        break;
-                                                   }
-                                            }
-                                            else{
-                                                Error.setText("Variable no declarada "+i+": \n"
-                                                                + "________________________________________________________________________\n"+token);
-                                                for(int j = 1; j <i; j++){
-                                                   txt += "\n";
-                                                }
-                                                LineaError.setText(txt+" ¡!");
-                                                 errores=1;
-                                                break;
-                                            } 
-                                        }
-                                    }     
-                                }
-                            }
-                            
-                            
-                            else {
-                                if(token.contains("mostrar")){
-                                    txtATraducido.setText("");
-                                    Error.setText("Error al declarar sentencia mostrar; en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                     errores=1;
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("entero") || token.contains("decimal") || token.contains("cadena")){
-                                    Error.setText("Error en declaracion de variables; en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("leer")){
-                                    Error.setText("Error en lectura de valor leer  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("STOP}")){
-                                    
-                                    Error.setText("Cierre de Ciclo para incorrecto  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("para")){
-                                    
-                                    Error.setText("Inicio de Ciclo para incorrecto  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("finmientras")){
-                                    Error.setText("Cierre de ciclo mientras incorrecto en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                    break;
-                                }
-                                if(token.contains("mientras")){
-                                    Error.setText("Inicio de ciclo mientras incorrecto en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("finsi")){
-                                    
-                                    Error.setText("Cierre de condicion si incorrecto en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("si")){
-                                   
-                                    Error.setText("Inicio de si incorrecto; en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                else {
-                                    Error.setText("Sintaxis Erronea en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                            }
-                            
-                            
-                    }
-                    
+        LinkedList<Integer> error = new LinkedList<>();
+        StringTokenizer st = new StringTokenizer(txtcod.getText(), ";{}", true);
+        String token = "", txt = "", e;
+        int i = 1, mainE = 0, start = 0, when = 0, it = 0, eB = 0;
+        Error.setText("");
+
+        if (txtcod.getText().matches(main)) {
+
+            while (st.hasMoreTokens()) {
+                token = st.nextToken();
+                if (st.hasMoreTokens()) {
+                    token = token + st.nextToken();
                 }
-                   
-                else {
-                    st = new StringTokenizer(txtcod.getText(),";{}",true);
-                    while (st.hasMoreTokens()){
-                        token = st.nextToken();
-                        if(st.hasMoreTokens())token = token+st.nextToken();
-                        if(token.matches("[.\\W\\w\\s]*(\\})") && st.countTokens() == 1){
-                            String auxTok = st.nextToken();
-                            token = token+(auxTok.substring(0,auxTok.indexOf("\n")));
-                        }
-                            StringTokenizer lin = new StringTokenizer(token,"\n",true);
-                            while (lin.hasMoreTokens()){
-                                e = lin.nextToken();
-                                if("\n".equals(e)) i++;
-                            }
-                            if(eB == 1) break;
-                            if(token.matches(start2)) start++;
-                            if(token.matches(start3)) start--;
-                            if(token.matches(when2)) when++;
-                            if(token.matches(when3)) when--;
-                            if(token.matches(it2)) it++;
-                            if(token.matches(it3)) it--;
-                            if((st.hasMoreTokens() == false && (start > 0 || when > 0 || it > 0)) || (start < 0 || when < 0 || it < 0)) eB = 1;
-                            
-                            if((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0){
-                                Error.setText("Compilado Exitosamente xD lml");
-                                if(token.matches(main3)) eB = 1;
-                            }
-                             
-                            else {
-                                if(token.contains("mostrar")){
-                                    Error.setText("Error al declarar sentencia mostrar  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("entero") || token.contains("decimal") || token.contains("cadena")){
-                                    Error.setText("Error en declaracion de variables  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("leer")){
-                                    Error.setText("Error en lectura de valor leer en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("STOP}")){
-                                    Error.setText("Cierre de Ciclo para incorrecto en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("para")){
-                                    Error.setText("Inicio de Ciclo para incorrecto  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("finmientras")){
-                                    Error.setText("Cierre de ciclo WHEN incorrecto  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("mientras")){
-                                    Error.setText("Inicio de ciclo mientras incorrecto  en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("finsi")){
-                                    Error.setText("Cierre de condicion si incorrecto; en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                if(token.contains("si")){
-                                    Error.setText("Inicio de si incorrecto en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                                else {
-                                    Error.setText("Sintaxis Erronea en la linea "+i+": \n"
-                                                   + "\n"+token);
-                                    for(int j = 1; j <i; j++){
-                                        txt += "\n";
-                                    }
-                                    LineaError.setText(txt+" ¡!");
-                                     errores=1;
-                                    break;
-                                }
-                            }
+                if (token.matches("[.\\W\\w\\s]*(\\})") && st.countTokens() == 1) {
+                    String auxTok = st.nextToken();
+                    token = token + (auxTok.substring(0, auxTok.indexOf("\n")));
+                }
+                StringTokenizer lin = new StringTokenizer(token, "\n", true);
+                while (lin.hasMoreTokens()) {
+                    e = lin.nextToken();
+                    if ("\n".equals(e)) {
+                        i++;
                     }
-                    if(mainE == 0) {
-                        Error.setText("Cierre de Clase incorrecto en la Linea "+i+": \n"
-                                       + "\n"+token);
-                        for(int j = 1; j <1; j++){
+                }
+
+                if (token.matches(start2)) {
+                    start++;
+                }
+                if (token.matches(start3)) {
+                    start--;
+                }
+                if (token.matches(when2)) {
+                    when++;
+                }
+                if (token.matches(when3)) {
+                    when--;
+                }
+                if (token.matches(it2)) {
+                    it++;
+                }
+                if (token.matches(it3)) {
+                    it--;
+                }
+                if ((st.hasMoreTokens() == false && (start > 0 || when > 0 || it > 0)) || (start < 0 || when < 0 || it < 0)) {
+                    eB = 1;
+                }
+
+                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                    if (token.matches(take)) {
+
+                    }
+                    if (token.matches(var)) {
+                        StringTokenizer stTipo = new StringTokenizer(token, " ,;");
+                        String tipo = stTipo.nextToken();
+
+                        if (tipo.contains("entero")) {
+
+                            while (stTipo.hasMoreTokens()) {
+                                tipo = stTipo.nextToken();
+
+                                if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
+                                    Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
+                                            + "________________________________________________________________________\n" + token);
+                                    for (int j = 1; j < i; j++) {
+                                        txt += "\n";
+                                    }
+                                    LineaError.setText(txt + " ¡!");
+                                    errores = 1;
+                                    break;
+                                }
+
+                                ENT.add(tipo);
+                            }
+                        }
+                        if (tipo.contains("decimal")) {
+
+                            while (stTipo.hasMoreTokens()) {
+                                tipo = stTipo.nextToken();
+
+                                if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
+                                    Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
+                                            + "________________________________________________________________________\n" + token);
+                                    for (int j = 1; j < i; j++) {
+                                        txt += "\n";
+                                    }
+                                    LineaError.setText(txt + " ¡!");
+                                    errores = 1;
+                                    break;
+                                }
+
+                                DEC.add(tipo);
+                            }
+                        }
+                        if (tipo.contains("leer")) {
+
+                            while (stTipo.hasMoreTokens()) {
+                                tipo = stTipo.nextToken();
+
+                                if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
+                                    Error.setText("La Variable esta repetida (" + tipo + ") " + i + ": \n"
+                                            + "________________________________________________________________________\n" + token);
+                                    for (int j = 1; j < i; j++) {
+                                        txt += "\n";
+                                    }
+                                    LineaError.setText(txt + " ¡!");
+                                    errores = 1;
+                                    break;
+                                }
+
+                                leer.add(tipo);
+                            }
+                        }
+                        if (tipo.contains("cadena")) {
+
+                            while (stTipo.hasMoreTokens()) {
+                                tipo = stTipo.nextToken();
+
+                                if (ENT.contains(tipo) || DEC.contains(tipo) || TEXT.contains(tipo) || leer.contains(tipo)) {
+                                    Error.setText("La variable esta repetida (" + tipo + ") " + i + ": \n"
+                                            + "________________________________________________________________________\n" + token);
+                                    for (int j = 1; j < i; j++) {
+                                        txt += "\n";
+                                    }
+                                    LineaError.setText(txt + " ¡!");
+                                    errores = 1;
+                                    break;
+                                }
+
+                                TEXT.add(tipo);
+                            }
+                        }
+                    }
+                    if (token.matches(defVal)) {
+                        StringTokenizer stComprobar = new StringTokenizer(token, " \n\t=;");
+                        String ID = stComprobar.nextToken(), comprobar = "", tok = "";
+                        //System.out.print(ID);
+                        while (stComprobar.hasMoreTokens()) {
+                            comprobar += stComprobar.nextToken();
+                        }
+
+                        if (ENT.contains(ID)) {
+                            StringTokenizer stComprobarE = new StringTokenizer(comprobar, "+*/-");
+                            while (stComprobarE.hasMoreTokens()) {
+                                tok = stComprobarE.nextToken();
+
+                                if (tok.matches(id)) {
+                                    if (ENT.contains(tok)); else {
+                                        Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
+                                                + "________________________________________________________________________\n" + token);
+                                        for (int j = 1; j < i; j++) {
+                                            txt += "\n";
+                                        }
+                                        LineaError.setText(txt + " ¡!");
+                                        errores = 1;
+                                        break;
+                                    }
+                                } else {
+                                    if (tok.matches(entero)); else {
+                                        Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
+                                                + "________________________________________________________________________\n" + token);
+                                        for (int j = 1; j < i; j++) {
+                                            txt += "\n";
+                                        }
+                                        LineaError.setText(txt + " ¡!");
+                                        errores = 1;
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (DEC.contains(ID)) {
+                                StringTokenizer stComprobarD = new StringTokenizer(comprobar, "+*/-");
+                                while (stComprobarD.hasMoreTokens()) {
+                                    tok = stComprobarD.nextToken();
+
+                                    if (tok.matches(id)) {
+                                        if (DEC.contains(tok)); else {
+                                            Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
+                                                    + "________________________________________________________________________\n" + token);
+                                            for (int j = 1; j < i; j++) {
+                                                txt += "\n";
+                                            }
+                                            LineaError.setText(txt + " ¡!");
+                                            errores = 1;
+                                            break;
+                                        }
+                                    } else {
+                                        if (tok.matches(decimal)); else {
+                                            Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
+                                                    + "________________________________________________________________________\n" + token);
+                                            for (int j = 1; j < i; j++) {
+                                                txt += "\n";
+                                            }
+                                            LineaError.setText(txt + " ¡!");
+                                            errores = 1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (TEXT.contains(ID)) {
+                                    if (comprobar.matches("((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)")); else {
+                                        Error.setText("ERROR SEMÁNTICO " + i + ": \n"
+                                                + "________________________________________________________________________\n" + token);
+                                        for (int j = 1; j < i; j++) {
+                                            txt += "\n";
+                                        }
+                                        LineaError.setText(txt + " ¡!");
+                                        errores = 1;
+                                        break;
+                                    }
+                                } else {
+                                    Error.setText("Variable no declarada " + i + ": \n"
+                                            + "________________________________________________________________________\n" + token);
+                                    for (int j = 1; j < i; j++) {
+                                        txt += "\n";
+                                    }
+                                    LineaError.setText(txt + " ¡!");
+                                    errores = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (token.contains("mostrar")) {
+                        txtATraducido.setText("");
+                        Error.setText("Error al declarar sentencia mostrar; en la linea " + i + ": \n"
+                                + "\n" + token);
+                        errores = 1;
+                        for (int j = 1; j < i; j++) {
                             txt += "\n";
                         }
-                        LineaError.setText(txt+" ¡!");
-                         errores=1;
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("entero") || token.contains("decimal") || token.contains("cadena")) {
+                        Error.setText("Error en declaracion de variables; en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("leer")) {
+                        Error.setText("Error en lectura de valor leer  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("STOP}")) {
+
+                        Error.setText("Cierre de Ciclo para incorrecto  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("para")) {
+
+                        Error.setText("Inicio de Ciclo para incorrecto  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("finmientras")) {
+                        Error.setText("Cierre de ciclo mientras incorrecto en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        break;
+                    }
+                    if (token.contains("mientras")) {
+                        Error.setText("Inicio de ciclo mientras incorrecto en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("finsi")) {
+
+                        Error.setText("Cierre de condicion si incorrecto en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("si")) {
+
+                        Error.setText("Inicio de si incorrecto; en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    } else {
+                        Error.setText("Sintaxis Erronea en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
                     }
                 }
-            if(errores==1){
+
+            }
+
+        } else {
+            st = new StringTokenizer(txtcod.getText(), ";{}", true);
+            while (st.hasMoreTokens()) {
+                token = st.nextToken();
+                if (st.hasMoreTokens()) {
+                    token = token + st.nextToken();
+                }
+                if (token.matches("[.\\W\\w\\s]*(\\})") && st.countTokens() == 1) {
+                    String auxTok = st.nextToken();
+                    token = token + (auxTok.substring(0, auxTok.indexOf("\n")));
+                }
+                StringTokenizer lin = new StringTokenizer(token, "\n", true);
+                while (lin.hasMoreTokens()) {
+                    e = lin.nextToken();
+                    if ("\n".equals(e)) {
+                        i++;
+                    }
+                }
+                if (eB == 1) {
+                    break;
+                }
+                if (token.matches(start2)) {
+                    start++;
+                }
+                if (token.matches(start3)) {
+                    start--;
+                }
+                if (token.matches(when2)) {
+                    when++;
+                }
+                if (token.matches(when3)) {
+                    when--;
+                }
+                if (token.matches(it2)) {
+                    it++;
+                }
+                if (token.matches(it3)) {
+                    it--;
+                }
+                if ((st.hasMoreTokens() == false && (start > 0 || when > 0 || it > 0)) || (start < 0 || when < 0 || it < 0)) {
+                    eB = 1;
+                }
+
+                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                    Error.setText("Compilado Exitosamente xD lml");
+                    if (token.matches(main3)) {
+                        eB = 1;
+                    }
+                } else {
+                    if (token.contains("mostrar")) {
+                        Error.setText("Error al declarar sentencia mostrar  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("entero") || token.contains("decimal") || token.contains("cadena")) {
+                        Error.setText("Error en declaracion de variables  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("leer")) {
+                        Error.setText("Error en lectura de valor leer en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("STOP}")) {
+                        Error.setText("Cierre de Ciclo para incorrecto en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("para")) {
+                        Error.setText("Inicio de Ciclo para incorrecto  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("finmientras")) {
+                        Error.setText("Cierre de ciclo WHEN incorrecto  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("mientras")) {
+                        Error.setText("Inicio de ciclo mientras incorrecto  en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("finsi")) {
+                        Error.setText("Cierre de condicion si incorrecto; en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                    if (token.contains("si")) {
+                        Error.setText("Inicio de si incorrecto en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    } else {
+                        Error.setText("Sintaxis Erronea en la linea " + i + ": \n"
+                                + "\n" + token);
+                        for (int j = 1; j < i; j++) {
+                            txt += "\n";
+                        }
+                        LineaError.setText(txt + " ¡!");
+                        errores = 1;
+                        break;
+                    }
+                }
+            }
+            if (mainE == 0) {
+                Error.setText("Cierre de Clase incorrecto en la Linea " + i + ": \n"
+                        + "\n" + token);
+                for (int j = 1; j < 1; j++) {
+                    txt += "\n";
+                }
+                LineaError.setText(txt + " ¡!");
+                errores = 1;
+            }
+        }
+        if (errores == 1) {
             Ejec.setEnabled(false);
-            
-        }else{
-                
-             Ejec.setEnabled(true);
-             Error.setText("Analisis sintactico exitoso, no se han encontrado errores");
-             Error.setForeground(new Color(0, 255, 0));
+
+        } else {
+
+            Ejec.setEnabled(true);
+            Error.setText("Analisis sintactico exitoso, no se han encontrado errores");
+            Error.setForeground(new Color(0, 255, 0));
         }
     }//GEN-LAST:event_CompiActionPerformed
 
     private void acercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaActionPerformed
-       Informacion inf=new Informacion();
+        Informacion inf = new Informacion();
         inf.show();
     }//GEN-LAST:event_acercaActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-      Guardar();
+        Guardar();
     }//GEN-LAST:event_guardarActionPerformed
 
     private void instructivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructivoActionPerformed
-    Visual in= new Visual();
-       in.show();
+        Visual in = new Visual();
+        in.show();
     }//GEN-LAST:event_instructivoActionPerformed
 
     /**
@@ -1706,49 +1390,43 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
     }
-   
-        public void Guardar()
-    {
-        try
-        {
+
+    public void Guardar() {
+        try {
             j = new JFileChooser();
-           
-            
-            j.setFileSelectionMode( JFileChooser.FILES_ONLY );
-            FileNameExtensionFilter filtroTxt=new FileNameExtensionFilter("Documento de Texto","txt");
+
+            j.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileNameExtensionFilter filtroTxt = new FileNameExtensionFilter("Documento de Texto", "txt");
             j.setFileFilter(filtroTxt);
             j.setFileHidingEnabled(false);
             int fin = this.getTitle().lastIndexOf('.');
-            if(fin == -1)fin = this.getTitle().length();
-            j.setSelectedFile(new File(this.getTitle().substring(0,fin)));
-          
+            if (fin == -1) {
+                fin = this.getTitle().length();
+            }
+            j.setSelectedFile(new File(this.getTitle().substring(0, fin)));
+
             int select = j.showSaveDialog(this);
             File guarda = j.getSelectedFile();
-            
-            if(select == JFileChooser.APPROVE_OPTION)
-            {
-                if(guarda !=null)
-                {
-                    FileWriter  save=new FileWriter(guarda+".txt");
+
+            if (select == JFileChooser.APPROVE_OPTION) {
+                if (guarda != null) {
+                    FileWriter save = new FileWriter(guarda + ".txt");
                     save.write(txtcod.getText());
                     save.close();
-                    JOptionPane.showMessageDialog(null,"Se ha guardado el archivo","Información",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha guardado el archivo", "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Su archivo no se ha guardado", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-        catch(IOException ex)
-        {
-            JOptionPane.showMessageDialog(null,"Su archivo no se ha guardado","Advertencia",JOptionPane.WARNING_MESSAGE);
-        } 
-    }                 
- 
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compi;
     private javax.swing.JMenu Ejec;
     private javax.swing.JMenuItem Ejecuta;
     private javax.swing.JEditorPane Error;
     private javax.swing.JEditorPane LineaError;
-    private javax.swing.JEditorPane Lineas;
     private javax.swing.JMenuItem MostrarTipoCar;
     private javax.swing.JMenuItem acerca;
     private javax.swing.JMenu compilar;
