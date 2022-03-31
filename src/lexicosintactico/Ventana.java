@@ -487,9 +487,6 @@ public class Ventana extends javax.swing.JFrame {
             for (int i = 1; i <= contador; i++) {
                 Text += i + "\n";
             }
-
-            //contarCaracteres(lectura);//Mando llamar el metodo de contar caracteres
-            //mayusculasyminusculas(lectura);
         } catch (NullPointerException e) {
 
             javax.swing.JOptionPane.showMessageDialog(j, "Has seleccionado cerrar programa, saliendo...");
@@ -498,52 +495,53 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void MostrarTipoCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarTipoCarActionPerformed
-
-        HashMap<String, Integer> r = new HashMap<>();
-        HashMap<String, Integer> op = new HashMap<>();
+        
+        //Tokens
+        HashMap<String, Integer> reservadas = new HashMap<>();
+        HashMap<String, Integer> operadores = new HashMap<>();
         HashMap<String, Integer> id = new HashMap<>();
-        HashMap<String, Integer> deli = new HashMap<>();
-        HashMap<String, Integer> num = new HashMap<>();
-        LinkedList<String> texto = new LinkedList<>();
+        HashMap<String, Integer> delimitadores = new HashMap<>();
+        HashMap<String, Integer> digitos = new HashMap<>();
+        LinkedList<String> alfabeto = new LinkedList<>();
 
-        r.put("comienzo", 0);
-        r.put("fin", 0);
-        r.put("cadena", 0);
-        r.put("ALFA", 0);//NO SE USA
-        r.put("entero", 0);
-        r.put("decimal", 0);
-        r.put("booleano", 0);
-        r.put("LNUM", 0);
-        r.put("leer", 0);
-        r.put("mostrar", 0);
-        r.put("mientras", 0);
-        r.put("si", 0);
-        r.put("IS", 0);
-        r.put("para", 0);
-        r.put("con_paso", 0);
-        r.put("hasta", 0);
-        r.put("finfor", 0);
-        r.put("finmientras", 0);
-        r.put("finsi", 0);
+        reservadas .put("comienzo", 0);
+        reservadas.put("fin", 0);
+        reservadas.put("cadena", 0);
+        reservadas.put("ALFA", 0);//NO SE USA
+        reservadas.put("entero", 0);
+        reservadas.put("decimal", 0);
+        reservadas.put("booleano", 0);
+        reservadas.put("LNUM", 0);
+        reservadas.put("leer", 0);
+        reservadas.put("mostrar", 0);
+        reservadas.put("mientras", 0);
+        reservadas.put("si", 0);
+        reservadas.put("IS", 0);
+        reservadas.put("para", 0);
+        reservadas.put("con_paso", 0);
+        reservadas.put("hasta", 0);
+        reservadas.put("finfor", 0);
+        reservadas.put("finmientras", 0);
+        reservadas.put("finsi", 0);
 
-        op.put("/", 0);
-        op.put("*", 0);
-        op.put("+", 0);
-        op.put("-", 0);
-        op.put("=", 0);
-        op.put("^", 0);
-        op.put("<", 0);
-        op.put(">", 0);
-        op.put("||", 0);
-        op.put("&&", 0);
+        operadores.put("/", 0);
+        operadores.put("*", 0);
+        operadores.put("+", 0);
+        operadores.put("-", 0);
+        operadores.put("=", 0);
+        operadores.put("^", 0);
+        operadores.put("<", 0);
+        operadores.put(">", 0);
+        operadores.put("||", 0);
+        operadores.put("&&", 0);
 
-        deli.put("#", 0);
-        deli.put(";", 0);
-        deli.put("{", 0);
-        deli.put("}", 0);
-        deli.put(")", 0);
-        deli.put(",", 0);
-        deli.put("(", 0);
+        delimitadores.put("#", 0);
+        delimitadores.put(";", 0);
+        delimitadores.put("{", 0);
+        delimitadores.put("}", 0);
+        delimitadores.put(")", 0);
+        delimitadores.put(",", 0);
+        delimitadores.put("(", 0);
 
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"Token", "Cantidad", "Tipo"});
@@ -553,22 +551,22 @@ public class Ventana extends javax.swing.JFrame {
         while (st.hasMoreTokens()) {
             token = st.nextToken();
             if (!" ".equals(token) && !"\n".equals(token) && !"\t".equals(token)) {
-                if (r.containsKey(token)) {
-                    r.put(token, r.get(token) + 1);
+                if (reservadas.containsKey(token)) {
+                    reservadas.put(token, reservadas.get(token) + 1);
                 } else {
-                    if (op.containsKey(token)) {
-                        op.put(token, op.get(token) + 1);
+                    if (operadores.containsKey(token)) {
+                        operadores.put(token, operadores.get(token) + 1);
                     } else {
-                        if (deli.containsKey(token)) {
-                            deli.put(token, deli.get(token) + 1);
+                        if (delimitadores.containsKey(token)) {
+                            delimitadores.put(token, delimitadores.get(token) + 1);
                             if ("#".equals(token)) {
                                 token = st.nextToken();
                                 while (st.hasMoreTokens() && !"#".equals(token)) {
                                     text += token;
                                     token = st.nextToken();
                                 }
-                                texto.add(text);
-                                deli.put(token, deli.get(token) + 1);
+                                alfabeto.add(text);
+                                delimitadores.put(token, delimitadores.get(token) + 1);
                                 text = "";
                             }
                         } else {
@@ -576,10 +574,10 @@ public class Ventana extends javax.swing.JFrame {
                                 id.put(token, id.get(token) + 1);
                             } else {
                                 if (token.matches("([0-9]*)|([0-9]*.[0-9]+)")) {
-                                    if (num.containsKey(token)) {
-                                        num.put(token, num.get(token) + 1);
+                                    if (digitos.containsKey(token)) {
+                                        digitos.put(token, digitos.get(token) + 1);
                                     } else {
-                                        num.put(token, 1);
+                                        digitos.put(token, 1);
                                     }
                                 } else {
                                     id.put(token, 1);
@@ -591,49 +589,49 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
 
-        Iterator<String> itr = r.keySet().iterator();
-        while (itr.hasNext()) {
-            token = itr.next();
-            if (r.get(token) > 0) {
-                model.addRow(new Object[]{token, r.get(token), "Palabra Reservada"});
+        Iterator<String> lexemas = reservadas.keySet().iterator();
+        while (lexemas.hasNext()) {
+            token = lexemas.next();
+            if (reservadas.get(token) > 0) {
+                model.addRow(new Object[]{token, reservadas.get(token), "Palabra Reservada"});
             }
         }
-        itr = op.keySet().iterator();
-        while (itr.hasNext()) {
-            token = itr.next();
-            if (op.get(token) > 0) {
-                model.addRow(new Object[]{token, op.get(token), "Operador"});
+        lexemas = operadores.keySet().iterator();
+        while (lexemas.hasNext()) {
+            token = lexemas.next();
+            if (operadores.get(token) > 0) {
+                model.addRow(new Object[]{token, operadores.get(token), "Operador"});
             }
         }
-        itr = deli.keySet().iterator();
-        while (itr.hasNext()) {
-            token = itr.next();
-            if (deli.get(token) > 0) {
-                model.addRow(new Object[]{token, deli.get(token), "Delimitador"});
+        lexemas = delimitadores.keySet().iterator();
+        while (lexemas.hasNext()) {
+            token = lexemas.next();
+            if (delimitadores.get(token) > 0) {
+                model.addRow(new Object[]{token, delimitadores.get(token), "Delimitador"});
             }
         }
-        itr = id.keySet().iterator();
-        while (itr.hasNext()) {
-            token = itr.next();
+        lexemas = id.keySet().iterator();
+        while (lexemas.hasNext()) {
+            token = lexemas.next();
             if (id.get(token) > 0) {
                 model.addRow(new Object[]{token, id.get(token), "Identificador"});
             }
         }
-        itr = num.keySet().iterator();
-        while (itr.hasNext()) {
-            token = itr.next();
-            if (num.get(token) > 0) {
+        lexemas = digitos.keySet().iterator();
+        while (lexemas.hasNext()) {
+            token = lexemas.next();
+            if (digitos.get(token) > 0) {
                 if (token.matches("[0-9]+")) {
-                    model.addRow(new Object[]{token, num.get(token), "Número"});
+                    model.addRow(new Object[]{token, digitos.get(token), "Número"});
                 }
                 if (token.matches("[0-9]+.[0-9]+")) {
-                    model.addRow(new Object[]{token, num.get(token), "Número Decimal"});
+                    model.addRow(new Object[]{token, digitos.get(token), "Número Decimal"});
                 }
             }
         }
-        itr = texto.iterator();
-        while (itr.hasNext()) {
-            model.addRow(new Object[]{itr.next(), "1", "Texto"});
+        lexemas = alfabeto.iterator();
+        while (lexemas.hasNext()) {
+            model.addRow(new Object[]{lexemas.next(), "1", "Texto"});
 
         }
        
@@ -682,18 +680,18 @@ public class Ventana extends javax.swing.JFrame {
                 defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
                 condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
                 var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
-                main = "((\\s)*" + id + "txtATraducidocomienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
-                main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
-                start2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
+                principal = "((\\s)*" + id + "txtATraducidocomienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                principal2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                principal3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
+                cicl_para2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
                 foresito = "((\\s)*FOR(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*)",
-                start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
-                when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                cicl_para3 = "((\\s)*finpara(\\s)*(\\}))",
+                cicl_mien2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                cicl_mien3 = "((\\s)*finmientras(\\s)*(\\}))",
                 it2 = "((\\s)*si(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 it3 = "((\\s)*finsi(\\s)*(\\}))",
                 entero = "[0-9]*",
-                step = "(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)",
+                parae = "(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)",
                 to = "hasta(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{)",
                 decimal = "[0-9]*.[0-9]+";
 
@@ -703,7 +701,7 @@ public class Ventana extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(this,"Identificando Variables...");
             token = st.nextToken();
 
-            if (token.matches(main2)) {
+            if (token.matches(principal2)) {
 
                 String tokinn = "'";
                 StringTokenizer tokin = new StringTokenizer(token, " \n");
@@ -779,7 +777,7 @@ public class Ventana extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Se encontró una operación");
             }
 
-            if (token1.matches(start2)) {
+            if (token1.matches(cicl_para2)) {
                 JOptionPane.showMessageDialog(this, "Se encontró un ciclo for");
 
             }
@@ -791,7 +789,7 @@ public class Ventana extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Se encontró un condicional si");
 
             }
-            if (token1.matches(when2)) {
+            if (token1.matches(cicl_mien2)) {
                 JOptionPane.showMessageDialog(this, "Se encontró un ciclo cuando");
 
             }
@@ -824,13 +822,13 @@ public class Ventana extends javax.swing.JFrame {
                 defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
                 condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
                 var = "((\\s)*((entero)|(decimal)|(cadena))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
-                main = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
-                main2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
-                main3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
-                start2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
-                start3 = "((\\s)*STOP(\\s)*(\\}))",
-                when2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
-                when3 = "((\\s)*finmientras(\\s)*(\\}))",
+                principal = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{)[.\\W\\w\\s]*(fin(\\s)*(\\})(\\s)*)$)",
+                principal2 = "((\\s)*" + id + "(\\b)(\\s)*comienzo(\\s)*(\\{))",
+                principal3 = "((\\s)*fin(\\s)*(\\})(\\s)*)",
+                cicl_para2 = "((\\s)*para(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(con_paso)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(hasta)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
+                cicl_para3 = "((\\s)*finpara(\\s)*(\\}))",
+                cicl_mien2 = "((\\s)*mientras(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                cicl_mien3 = "((\\s)*finmientras(\\s)*(\\}))",
                 it2 = "((\\s)*si(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 it3 = "((\\s)*finsi(\\s)*(\\}))",
                 entero = "[0-9]*",
@@ -842,7 +840,7 @@ public class Ventana extends javax.swing.JFrame {
         int i = 1, mainE = 0, start = 0, when = 0, it = 0, eB = 0;
         Error.setText("");
 
-        if (txtcod.getText().matches(main)) {
+        if (txtcod.getText().matches(principal)) {
 
             while (st.hasMoreTokens()) {
                 token = st.nextToken();
@@ -861,16 +859,16 @@ public class Ventana extends javax.swing.JFrame {
                     }
                 }
 
-                if (token.matches(start2)) {
+                if (token.matches(cicl_para2)) {
                     start++;
                 }
-                if (token.matches(start3)) {
+                if (token.matches(cicl_para3)) {
                     start--;
                 }
-                if (token.matches(when2)) {
+                if (token.matches(cicl_mien2)) {
                     when++;
                 }
-                if (token.matches(when3)) {
+                if (token.matches(cicl_mien3)) {
                     when--;
                 }
                 if (token.matches(it2)) {
@@ -883,7 +881,7 @@ public class Ventana extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(principal2) || token.matches(principal3) || token.matches("(\\s)*(\\$)") || token.matches(cicl_para2) || token.matches(cicl_para3) || token.matches(cicl_mien2) || token.matches(cicl_mien3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     if (token.matches(take)) {
 
                     }
@@ -971,7 +969,6 @@ public class Ventana extends javax.swing.JFrame {
                     if (token.matches(defVal)) {
                         StringTokenizer stComprobar = new StringTokenizer(token, " \n\t=;");
                         String ID = stComprobar.nextToken(), comprobar = "", tok = "";
-                        //System.out.print(ID);
                         while (stComprobar.hasMoreTokens()) {
                             comprobar += stComprobar.nextToken();
                         }
@@ -1093,7 +1090,7 @@ public class Ventana extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("STOP}")) {
+                    if (token.contains("finpara}")) {
 
                         Error.setText("Cierre de Ciclo para incorrecto  en la linea " + i + ": \n"
                                 + "\n" + token);
@@ -1190,16 +1187,16 @@ public class Ventana extends javax.swing.JFrame {
                 if (eB == 1) {
                     break;
                 }
-                if (token.matches(start2)) {
+                if (token.matches(cicl_para2)) {
                     start++;
                 }
-                if (token.matches(start3)) {
+                if (token.matches(cicl_para3)) {
                     start--;
                 }
-                if (token.matches(when2)) {
+                if (token.matches(cicl_mien2)) {
                     when++;
                 }
-                if (token.matches(when3)) {
+                if (token.matches(cicl_mien3)) {
                     when--;
                 }
                 if (token.matches(it2)) {
@@ -1212,9 +1209,9 @@ public class Ventana extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(principal2) || token.matches(principal3) || token.matches("(\\s)*(\\$)") || token.matches(cicl_para2) || token.matches(cicl_para3) || token.matches(cicl_mien2) || token.matches(cicl_mien3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     Error.setText("Compilado Exitosamente xD lml");
-                    if (token.matches(main3)) {
+                    if (token.matches(principal3)) {
                         eB = 1;
                     }
                 } else {
@@ -1248,7 +1245,7 @@ public class Ventana extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("STOP}")) {
+                    if (token.contains("finpara}")) {
                         Error.setText("Cierre de Ciclo para incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
