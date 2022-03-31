@@ -494,8 +494,6 @@ public class Ventana extends javax.swing.JFrame {
 
             javax.swing.JOptionPane.showMessageDialog(j, "Has seleccionado cerrar programa, saliendo...");
 
-            System.exit(0);
-
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
