@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package lexicosintactico;
+
+package Lex_Sin_Sem;
 
 import instructivo.Visual;
 import java.awt.Color;
@@ -28,10 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Luis Fer
- */
+
 public class Ventana extends javax.swing.JFrame {
 
     FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos Word y txt", "docx", "txt");
@@ -114,7 +107,7 @@ public class Ventana extends javax.swing.JFrame {
         Error.setForeground(java.awt.Color.blue);
         jScrollPane5.setViewportView(Error);
 
-        panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 518, 620, 120));
+        panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 498, 620, 140));
 
         LineaError.setEditable(false);
         LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -167,7 +160,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Resultado de la compilacion");
         jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
+        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

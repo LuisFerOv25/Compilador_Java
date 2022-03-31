@@ -1,5 +1,5 @@
 
-package lexicosintactico;
+package Lex_Sin_Sem;
 
 
 import java.awt.*;

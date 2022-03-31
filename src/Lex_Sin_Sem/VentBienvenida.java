@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package lexicosintactico;
+
+package Lex_Sin_Sem;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
