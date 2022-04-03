@@ -2,6 +2,7 @@
 package Lex_Sin_Sem;
 
 import instructivo.Visual;
+import instructivo.Visual_Ejemplos;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -92,6 +93,8 @@ public class Ventana extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         instructivo = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        Ejemplo = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         acerca = new javax.swing.JMenuItem();
 
         jMenuItem7.setText("jMenuItem7");
@@ -396,6 +399,16 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMenu6.add(instructivo);
         jMenu6.add(jSeparator7);
+
+        Ejemplo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Component.png"))); // NOI18N
+        Ejemplo.setText("Ejemplos");
+        Ejemplo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EjemploActionPerformed(evt);
+            }
+        });
+        jMenu6.add(Ejemplo);
+        jMenu6.add(jSeparator3);
 
         acerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/About.png"))); // NOI18N
         acerca.setText("Acerca de");
@@ -979,7 +992,9 @@ public class Ventana extends javax.swing.JFrame {
                                 tok = stComprobarE.nextToken();
 
                                 if (tok.matches(id)) {
-                                    if (ENT.contains(tok)); else {
+                                    if (ENT.contains(tok));
+                                    
+                                     else {
                                         Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                 + "________________________________________________________________________\n" + token);
                                         Error.setForeground(new Color(235,114,7));
@@ -991,7 +1006,9 @@ public class Ventana extends javax.swing.JFrame {
                                         break;
                                     }
                                 } else {
-                                    if (tok.matches(entero)); else {
+                                    if (tok.matches(entero)); 
+                                    
+                                    else {
                                         Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                 + "________________________________________________________________________\n" + token);
                                         Error.setForeground(new Color(235,114,7));
@@ -1011,7 +1028,9 @@ public class Ventana extends javax.swing.JFrame {
                                     tok = stComprobarD.nextToken();
 
                                     if (tok.matches(id)) {
-                                        if (DEC.contains(tok)); else {
+                                        if (DEC.contains(tok));
+                                        
+                                        else {
                                             Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                     + "________________________________________________________________________\n" + token);
                                             Error.setForeground(new Color(235,114,7));
@@ -1023,7 +1042,9 @@ public class Ventana extends javax.swing.JFrame {
                                             break;
                                         }
                                     } else {
-                                        if (tok.matches(decimal)); else {
+                                        if (tok.matches(decimal)); 
+                                        
+                                        else {
                                             Error.setText("ERROR SEMÁNTICO (" + tok + ") " + i + ": \n"
                                                     + "________________________________________________________________________\n" + token);
                                             Error.setForeground(new Color(235,114,7));
@@ -1383,6 +1404,11 @@ public class Ventana extends javax.swing.JFrame {
         in.show();
     }//GEN-LAST:event_instructivoActionPerformed
 
+    private void EjemploActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjemploActionPerformed
+    Visual_Ejemplos vis= new Visual_Ejemplos();
+        vis.show();
+    }//GEN-LAST:event_EjemploActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1452,6 +1478,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem Compi;
     private javax.swing.JMenu Ejec;
     private javax.swing.JMenuItem Ejecuta;
+    private javax.swing.JMenuItem Ejemplo;
     private javax.swing.JEditorPane Error;
     private javax.swing.JEditorPane LineaError;
     private javax.swing.JMenuItem MostrarTipoCar;
@@ -1478,6 +1505,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JMenuItem lim;
     private javax.swing.JMenu limpiar;
