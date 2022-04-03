@@ -62,7 +62,7 @@ public class Visual_Ejemplos extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 0));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
