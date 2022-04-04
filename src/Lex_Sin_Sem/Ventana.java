@@ -101,7 +101,7 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel1.setBackground(new java.awt.Color(0, 51, 153));
+        panel1.setBackground(new java.awt.Color(51, 51, 51));
         panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Error.setEditable(false);
@@ -110,7 +110,7 @@ public class Ventana extends javax.swing.JFrame {
         Error.setForeground(java.awt.Color.blue);
         jScrollPane5.setViewportView(Error);
 
-        panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 498, 620, 140));
+        panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 498, 620, 130));
 
         LineaError.setEditable(false);
         LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -138,7 +138,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(LineaError, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
@@ -151,25 +151,25 @@ public class Ventana extends javax.swing.JFrame {
         txtATraducido.setRows(5);
         jScrollPane1.setViewportView(txtATraducido);
 
-        panel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, 240, 390));
+        panel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 40, 270, 390));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Resultado de la ejecucion");
+        jLabel4.setText("Resultado de la ejecución");
         jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
+        panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Resultado de la compilacion");
         jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, -1, -1));
+        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tabla de Simbolos");
         jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        panel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
 
         tabla.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(

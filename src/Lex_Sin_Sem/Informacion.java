@@ -19,6 +19,8 @@ public class Informacion extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/aboutt.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
